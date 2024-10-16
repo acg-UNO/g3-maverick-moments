@@ -1,0 +1,24 @@
+.topnav{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.topnav-events{
+    float: right;
+}
+.topnav-venues{
+    float: left;
+}
+.topnav-mavmoment{
+    text-align: center;
+}
+.topnav-mavmoment h1{
+    font-size: 2.5rem;
+    margin-top: 10px;
+}
+.bubble{
+    border-radius: 15px;
+    background-color: lightgray;
+}
+.bubble h2{
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+}
