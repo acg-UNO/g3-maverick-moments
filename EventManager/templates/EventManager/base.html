@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Maverick Moments{% endblock %}</title>
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    {% block css %}{% endblock %}
+    {% block css %}  {% endblock %}
 </head>
 <body>
     <div class="topnav">
@@ -27,11 +27,12 @@
         </div>
         <div style="width: 15%; float: left;">
             <div class="topnav-log_in_register bubble">
-                <h2><a href="{% url 'log_in_register' %}">Log In / Register</a></h2>
+                <h2><a href="{% url 'register' %}">Log In / Register</a></h2>
             </div>
         </div>
     </div>
     {% block content %}
+    <p> this is the default content block. You gotta put stuff in block content!!! </p>
     {% endblock %}
 </body>
 </html>

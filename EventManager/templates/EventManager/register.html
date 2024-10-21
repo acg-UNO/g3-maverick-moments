@@ -1,0 +1,17 @@
+{% extends "EventManager/base.html" %}
+{% block title %} Register {% endblock %}
+{% block css %}
+<!-- link css files here -->
+{% endblock %}
+{% block content %}
+
+<h1>Create An Account</h1>
+<form method="POST">
+{% csrf_token %}
+     
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+     
+</form>
+
+{% endblock %}

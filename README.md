@@ -14,7 +14,9 @@ mine is named 'env' and the default name 'venv' is already in the .gitignore
     python manage.py migrate
 ### 6. Add any new packages to your environment
     pip install -r requirements.txt
+### 7. Create your own SuperUser to access /admin page
+    python manage.py createsuperuser
 Now you're good to go
 
-Run server:
+### Run server
     python manage.py runserver
