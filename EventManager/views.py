@@ -30,4 +30,7 @@ def register(request):
     else:
         form = RegisterForm()
 
-    return render(request, "EventManager/register.html", {"form": form})
+    context = {
+        'form': form
+    }
+    return render(request, "EventManager/register.html", context=context)
