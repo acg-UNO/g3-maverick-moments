@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
 from .models import *
 from .forms import *
 import datetime
@@ -16,7 +15,9 @@ def events(request):
 
 
 def venues(request):
-    return render(request, 'EventManager/venues.html')
+    venues_list = Venue.objects.all()
+    context = {'venues': venues_list}
+    return render(request, 'EventManager/venues.html', context)
 
 
 def register(request):

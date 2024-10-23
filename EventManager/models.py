@@ -35,7 +35,7 @@ class Registration(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
 
-#Event Model
+#Event Comment Model
 class EventComment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     text = models.TextField()

@@ -6,9 +6,17 @@
 <!-- link css files here -->
 {% endblock %}
 
+<!-- iterate over the venues passed from the view.py -->
 {% block content %}
-
 <h1>Venues</h1>
-<p>Details about our venues go here.</p>
-
+<ul>
+    {% for venue in venues %}
+        <li>
+            <strong>{{ venue.name }}</strong> - {{ venue.city }}, {{ venue.state }}<br>
+            {% if venue.image %}
+                <img src="{{ venue.image.url }}" alt="{{ venue.name }}" style="max-width: 500px; height: auto;">
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
 {% endblock %}
