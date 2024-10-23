@@ -13,6 +13,16 @@ def index(request):
 def events(request):
     return render(request, 'EventManager/events.html')
 
+def eventdetails(request, pk):
+    pk = int(pk)
+    try: event = Event.objects.get(id = pk)
+    except Event.DoesNotExist: return redirect('events')
+    # get comments and add to context
+    context = {
+        'event': event
+    }
+    return render(request, 'EventManager/eventdetails.html', context = context)
+
 
 def venues(request):
     venues_list = Venue.objects.all()
