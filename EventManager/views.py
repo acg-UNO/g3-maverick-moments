@@ -35,3 +35,11 @@ def register(request):
         'form': form
     }
     return render(request, "EventManager/register.html", context=context)
+def venue_events(request, venue_id):
+    venue = get_object_or_404(Venue, id=venue_id)
+    upcoming_events = Event.objects.filter(venue=venue, date__gte=datetime.now()).order_by('date')
+    context = {
+        'venue': venue,
+        'upcoming_events': upcoming_events,
+    }
+    return render(request, 'EventManager/venue_events.html', context)
