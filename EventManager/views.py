@@ -13,15 +13,24 @@ def index(request):
 def events(request):
     return render(request, 'EventManager/events.html')
 
-def eventdetails(request, pk):
-    pk = int(pk)
-    try: event = Event.objects.get(id = pk)
+def eventdetails(request, id):
+    id = int(id)
+    try: event = Event.objects.get(id = id)
     except Event.DoesNotExist: return redirect('events')
     # get comments and add to context
     context = {
         'event': event
     }
     return render(request, 'EventManager/eventdetails.html', context = context)
+
+def eventregister(request, id):
+    id = int(id)
+    try: event = Event.objects.get(id = id)
+    except Event.DoesNotExist: return redirect('events')
+    try: user = request.user
+    except: return redirect('events')
+    Registration.objects.create(user = user, event = event)
+    return redirect('eventdetails', id)
 
 
 def venues(request):
