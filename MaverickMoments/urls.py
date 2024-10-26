@@ -21,11 +21,12 @@ from django.views.static import serve
 from django.conf import settings
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("EventManager.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('eventmanager/', include('EventManager.urls')),
+
 
 ]
 

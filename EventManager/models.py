@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Venue Model
+
+
 class Venue(models.Model):
     name = models.CharField(max_length=200)
     address_line_1 = models.CharField(max_length=200)
@@ -17,6 +19,8 @@ class Venue(models.Model):
         return self.name
 
 # Event Model
+
+
 class Event(models.Model):
     title = models.CharField(max_length=200)
     start_date = models.DateTimeField(help_text="The date if it's 1 day only, the start date if the event spans multiple days.")
@@ -27,6 +31,7 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
 
 # Registration Model
 class Registration(models.Model):
