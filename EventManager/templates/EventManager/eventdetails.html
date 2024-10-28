@@ -1,0 +1,21 @@
+{% extends "EventManager/base.html" %}
+{% load static %}
+
+{% block title %} {{ event.title }} {% endblock %}
+
+{% block css %}
+<!-- link css files here -->
+{% endblock %}
+
+
+{% block content %}
+
+<h1>{{ event.title }}</h1>
+<img src="{{ event.image.url }}" style="max-width: 100px; max-height: 100px;">
+<h2>{{ event.start_date }} {% if event.end_date %}- {{ event.end_date }}{% endif %}</h2>
+<h2>AT <a href="#">{{ event.venue.name }}</a></h2> <!-- replace '#' with link to individual venue page when ready -->
+<p>{{ event.description }}</p>
+
+<!-- put comments here or sumn -->
+
+{% endblock %}

@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
 import datetime
+from .models import Event
 
 
 # Create your views here.
@@ -11,7 +12,34 @@ def index(request):
 
 
 def events(request):
-    return render(request, 'EventManager/events.html')
+    events_list = Event.objects.all()
+    context = {'events': events_list}
+    return render(request, 'EventManager/events.html', context)
+
+
+def event_list(request):
+    events = Event.objects.all().order_by('title', 'start_date')
+    return render(request, 'EventManager/event_list.html', {'events': events})
+
+
+def eventdetails(request, id):
+    id = int(id)
+    try: event = Event.objects.get(id = id)
+    except Event.DoesNotExist: return redirect('events')
+    # get comments and add to context
+    context = {
+        'event': event
+    }
+    return render(request, 'EventManager/eventdetails.html', context = context)
+
+def eventregister(request, id):
+    id = int(id)
+    try: event = Event.objects.get(id = id)
+    except Event.DoesNotExist: return redirect('events')
+    try: user = request.user
+    except: return redirect('events')
+    Registration.objects.create(user = user, event = event)
+    return redirect('eventdetails', id)
 
 
 def venues(request):
