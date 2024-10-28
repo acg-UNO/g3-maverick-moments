@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
 import datetime
-from .models import Event
-
+from .models import Event, EventComment
+from .forms import EventCommentForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -21,14 +22,33 @@ def event_list(request):
     events = Event.objects.all().order_by('title', 'start_date')
     return render(request, 'EventManager/event_list.html', {'events': events})
 
-
+# Event Details View
 def eventdetails(request, id):
     id = int(id)
-    try: event = Event.objects.get(id = id)
-    except Event.DoesNotExist: return redirect('events')
+    try:
+        event = Event.objects.get(id = id)
+    except Event.DoesNotExist:
+        return redirect('events')
+
     # get comments and add to context
+    comments = event.eventcomment_set.all()
+
+    # add form submission for adding comments to events (users must be logged in to add comments)
+    if request.method == 'POST' and request.user.is_authenticated:
+        form = EventCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user # makes user/comment association
+            comment.event = event
+            comment.save() # save comment to dbs
+            return redirect('eventdetails', id=event.id)
+    else:
+        form = EventCommentForm() # makes it so it creates an empty form for GET request
+
     context = {
-        'event': event
+        'event': event,
+        'comments': comments,
+        'form': form
     }
     return render(request, 'EventManager/eventdetails.html', context = context)
 
