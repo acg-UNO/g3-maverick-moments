@@ -42,6 +42,10 @@ def eventregister(request, id):
     return redirect('eventdetails', id)
 
 
+def maverick_moments(request):
+    return render(request, 'EventManager/base.html', context)
+
+
 def venues(request):
     venues_list = Venue.objects.all()
     context = {'venues': venues_list}

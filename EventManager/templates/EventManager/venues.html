@@ -13,7 +13,7 @@
 <ul>
     {% for venue in venues %}
         <li>
-            <strong>{{ venue.name }}</strong> - {{ venue.city }}, {{ venue.state }}<br>
+            <strong>{{ venue.name }}</strong> - {{ venue.address_line_1 }}, {{ venue.city }}, {{ venue.state }}<br>
             {% if venue.image %}
                 <img src="{{ venue.image.url }}" alt="{{ venue.name }}" style="max-width: 500px; height: auto;">
             {% endif %}
