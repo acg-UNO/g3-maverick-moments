@@ -13,7 +13,7 @@
 <ul>
     {% for event in events %}
         <li>
-            <strong>{{ event.title }}</strong> - {{ event.start_date}}, {{ venue.state }}<br>
+            <a href="{% url 'eventdetails' id=event.id %}"><strong>{{ event.title }}</strong></a> - {{ event.start_date}}, {{ event.venue.state }}<br>
 
         </li>
     {% endfor %}
