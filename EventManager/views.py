@@ -12,17 +12,26 @@ def index(request):
 
 
 def events(request):
-    events_list = Event.objects.all()
+    events_list = Event.objects.filter(start_date__gte=timezone.now()).order_by('start_date')
+        
+
     context = {'events': events_list}
     return render(request, 'EventManager/events.html', context)
 
 # Event Details View
 def eventdetails(request, id):
     id = int(id)
+    registered = False
     try:
         event = Event.objects.get(id = id)
     except Event.DoesNotExist:
         return redirect('events')
+    
+    if request.user.is_authenticated:
+        try: 
+            Registration.objects.get(user = request.user, event = event)
+            registered = True
+        except: pass
 
     # get comments and add to context
     comments = event.eventcomment_set.all()
@@ -42,18 +51,22 @@ def eventdetails(request, id):
     context = {
         'event': event,
         'comments': comments,
-        'form': form
+        'form': form,
+        'registered': registered
     }
     return render(request, 'EventManager/eventdetails.html', context = context)
 
 def eventregister(request, id):
-    id = int(id)
-    try: event = Event.objects.get(id = id)
-    except Event.DoesNotExist: return redirect('events')
-    try: user = request.user
-    except: return redirect('events')
-    Registration.objects.create(user = user, event = event)
-    return redirect('eventdetails', id)
+    if request.user.is_authenticated:
+        id = int(id)
+        try: event = Event.objects.get(id = id)
+        except Event.DoesNotExist: return redirect('events')
+        try: user = request.user
+        except: return redirect('events')
+        Registration.objects.create(user = user, event = event)
+        return redirect('eventdetails', id)
+    else:
+        return redirect('login')
 
 
 def venues(request):
