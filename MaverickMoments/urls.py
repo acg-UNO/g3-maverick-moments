@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.conf import settings
-from . import views
+
 
 
 urlpatterns = [
@@ -31,7 +31,3 @@ urlpatterns = [
 # allows to show img if debug = true during development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns = [
-    path('venues/<int:venue_id>/events/', views.venue_events, name='venue-events'),
-    # other URL patterns
-]
