@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import *
 from .models import Event
 
-# allows addition/modification of venues via /admin
+# allows addition/modifications via /admin
 admin.site.register(Venue)
 admin.site.register(Event)
 admin.site.register(Registration)

@@ -11,11 +11,41 @@
 {% block content %}
 
 <h1>{{ event.title }}</h1>
-<img src="{{ event.image.url }}" style="max-width: 100px; max-height: 100px;">
-<h2>{{ event.start_date }} {% if event.end_date %}- {{ event.end_date }}{% endif %}</h2>
-<h2>AT <a href="#">{{ event.venue.name }}</a></h2> <!-- replace '#' with link to individual venue page when ready -->
-<p>{{ event.description }}</p>
+    
+    
+{% if event.image %}    
+    <img src="{{ event.image.url }}" style="max-width: 100px; max-height: 100px;">
+{% else %}
+    <p><em>No image available for this event.</em></p>
+{% endif %}    
+    
+    <h2>{{ event.start_date }} {% if event.end_date %}- {{ event.end_date }}{% endif %}</h2>
+    <h2>AT <a href="#">{{ event.venue.name }}</a></h2> <!-- replace '#' with link to individual venue page when ready -->
+    <p>{{ event.description }}</p>
 
 <!-- put comments here or sumn -->
-
+    <h2>Comments</h2>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <strong>{{ comment.user.username }}</strong> ({{ comment.created_at }}):<br>
+                    {{ comment.text }}
+                </li>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+        </ul>
+    
+<!-- comment form for registered users only -->
+    {% if user.is_authenticated %}
+        <h3>Add a Comment</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit Comment</button>
+            </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
+    {% endif %}
+    
 {% endblock %}

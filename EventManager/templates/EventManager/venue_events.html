@@ -1,0 +1,20 @@
+{% extends 'EventManager/base.html' %}
+
+{% block content %}
+  <h2>Upcoming Events at {{ venue.name }}</h2>
+  <p>{{ venue.location }}</p>
+  
+  <ul>
+    {% for event in upcoming_events %}
+      <li>
+        <strong>{{ event.name }}</strong><br>
+        Date: {{ event.date }}<br>
+        Description: {{ event.description }}
+      </li>
+    {% empty %}
+      <p>No upcoming events.</p>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'venues-list' %}">Back to Venues</a>
+{% endblock %}
