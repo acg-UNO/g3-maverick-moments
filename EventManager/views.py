@@ -2,8 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
 import datetime
-from .models import Event, EventComment
-from .forms import EventCommentForm
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -16,11 +15,6 @@ def events(request):
     events_list = Event.objects.all()
     context = {'events': events_list}
     return render(request, 'EventManager/events.html', context)
-
-
-def event_list(request):
-    events = Event.objects.all().order_by('title', 'start_date')
-    return render(request, 'EventManager/event_list.html', {'events': events})
 
 # Event Details View
 def eventdetails(request, id):
@@ -62,14 +56,20 @@ def eventregister(request, id):
     return redirect('eventdetails', id)
 
 
-def maverick_moments(request):
-    return render(request, 'EventManager/base.html', context)
-
-
 def venues(request):
     venues_list = Venue.objects.all()
     context = {'venues': venues_list}
     return render(request, 'EventManager/venues.html', context)
+
+def venuedetails(request, id):
+    venue = get_object_or_404(Venue, id=id)
+    print()
+    upcoming_events = Event.objects.filter(venue=venue, start_date__gte=timezone.now()).order_by('start_date')
+    context = {
+        'venue': venue,
+        'upcoming_events': upcoming_events,
+    }
+    return render(request, 'EventManager/venuedetails.html', context)
 
 
 def register(request):
@@ -87,11 +87,3 @@ def register(request):
         'form': form
     }
     return render(request, "EventManager/register.html", context=context)
-def venue_events(request, venue_id):
-    venue = get_object_or_404(Venue, id=venue_id)
-    upcoming_events = Event.objects.filter(venue=venue, date__gte=datetime.now()).order_by('date')
-    context = {
-        'venue': venue,
-        'upcoming_events': upcoming_events,
-    }
-    return render(request, 'EventManager/venue_events.html', context)

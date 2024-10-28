@@ -20,7 +20,7 @@
 {% endif %}    
     
     <h2>{{ event.start_date }} {% if event.end_date %}- {{ event.end_date }}{% endif %}</h2>
-    <h2>AT <a href="#">{{ event.venue.name }}</a></h2> <!-- replace '#' with link to individual venue page when ready -->
+    <h2>AT <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a></h2> <!-- replace '#' with link to individual venue page when ready -->
     <p>{{ event.description }}</p>
 
 <!-- put comments here or sumn -->

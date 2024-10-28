@@ -25,9 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("EventManager.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('eventmanager/', include('EventManager.urls')),
-
-
 ]
 
 # allows to show img if debug = true during development

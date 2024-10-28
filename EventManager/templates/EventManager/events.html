@@ -9,6 +9,7 @@
 <!-- iterate over the venues passed from the view.py -->
 {% block content %}
 
+{% if events.0 %}
 <h1>Upcoming Events</h1>
 <ul>
     {% for event in events %}
@@ -19,4 +20,7 @@
     {% endfor %}
 </ul>
 
+{% else %}
+<h1> NO UPCOMING EVENTS </h1>
+{% endif %}
 {% endblock %}

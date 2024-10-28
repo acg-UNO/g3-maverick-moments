@@ -7,8 +7,8 @@
   <ul>
     {% for event in upcoming_events %}
       <li>
-        <strong>{{ event.name }}</strong><br>
-        Date: {{ event.date }}<br>
+        <strong>{{ event.title }}</strong><br>
+        Date: {{ event.start_date }}<br>
         Description: {{ event.description }}
       </li>
     {% empty %}
@@ -16,5 +16,5 @@
     {% endfor %}
   </ul>
 
-  <a href="{% url 'venues-list' %}">Back to Venues</a>
+  <a href="{% url 'venues' %}">Back to Venues</a>
 {% endblock %}
