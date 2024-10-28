@@ -14,6 +14,7 @@
 {% if user.is_authenticated %}
     {% if registered %} 
         <h2>You're registered for this event!</h2>
+        <p><a href="{% url 'eventunregister' id=event.id %}">unregister</a></p>
     {% else %}
         <a href="{% url 'eventregister' id=event.id %}"><h2>REGISTER</h2></a>
     {% endif %}
