@@ -25,28 +25,69 @@ body{
     font-size: 1.5rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-.topnav div{
-    float: left;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
 }
 .topnav-outside{
     width: 30%;
+    float: left;
 }
 .MAVERICK-MOMENTS{
     width: 40%;
     text-align: center;
+    float: left;
 }
-.navbar-bubble{
+.topnav-bubble{
     border-radius: 1rem;
     background-color: lightgray;
+    float: left;
 }
 .topnav-signin{
+    float: left;
     text-align: center;
-    width: 50%;
+    width: 30%;
+    margin-top: 0.5rem;
 }
 .topnav-signin p{
-    margin: 0.25rem;
+    margin: 0rem;
+    font-size: 1.5rem;
+    margin-bottom: 0px;
+    line-height: 75%;
+}
+.topnav-signin small{
+    font-size: .9rem;
+}
+.topnav-hello{
+    text-align: center;
+    margin-left: 1.75rem;
+    float: left;
+}
+.topnav-hello p{
+    margin-top: 0px;
+    margin-bottom: 0.25rem;
     font-size: 1.25rem;
+}
+.topnav-hello button{
+    width: 100%;
+    height: 2rem;
+    border-radius: 1.25rem;
+    font-size: 1rem;
+    font-weight: bolder;
+    border: none;
+    background-color: lightgray;
+}
+.topnav-hello button:hover{
+    cursor: pointer;
+}
+.topnav-account{
+    float: right;
+    border-radius: 1rem;
+    background-color: lightgray;
+    margin-right: 1.5rem;
+}
+.topnav-account h3{
+    margin-top: .75rem;
+    margin-bottom: .75rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }

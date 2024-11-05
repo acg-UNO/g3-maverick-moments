@@ -14,13 +14,11 @@
             
             {% if user.is_authenticated %}
 
-                <div>
-                    hello, {{ user.username }}
-                </div>
-                <div>
+                <div class="topnav-hello">
+                    <p>hello, {{ user.username }}</p>
                     <form action="{% url 'logout' %}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Log out</button>
+                        <button type="submit">LOGOUT</button>
                     </form>
                 </div>
 
@@ -33,18 +31,24 @@
 
             {% endif %}
                 <a href="{% url 'events' %}">
-            <div class="navbar-bubble" style="float: right">
+            <div class="topnav-bubble" style="float: right">
                 <h2>EVENTS</h2>
             </div></a>
         </div>
         <div class="MAVERICK-MOMENTS">
                 <h1><a href="{% url 'index' %}">MAVERICK MOMENTS</a></h1>
         </div>
-        <div>
+        <div class="topnav-outside">
                 <a href="{% url 'venues' %}">
-            <div class="navbar-bubble">
+            <div class="topnav-bubble">
                 <h2>VENUES</h2>
             </div></a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'account' %}">
+            <div class="topnav-account">
+                <h3>ACCOUNT</h3>
+            </div></a>
+            {% endif %}
         </div>
     </div>
     {% block content %}

@@ -120,3 +120,11 @@ def register(request):
         'form': form
     }
     return render(request, "EventManager/register.html", context=context)
+
+def account(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect("login")
+    
+    context = None
+    return render(request, "EventManager/account.html", context=context)
