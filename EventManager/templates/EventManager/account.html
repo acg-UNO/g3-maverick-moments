@@ -1,14 +1,49 @@
 {% extends "EventManager/base.html" %}
+{% load static %}
 {% block title %}
 index
 {% endblock %}
 {% block css %}
-<!-- link css files here -->
-
+<link href="{% static 'css/account.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
 
-ayo wuddup you are {{ user.username }}
-yadda this the account page.
+<div class="acc-left">
+    <h1>EVENTS YOU'RE REGISTERED FOR</h1>
+    {% if events %}
+    {% for event in events %}
+    <div class="acc-event">
+        <div class="acc-details">
+            {% if event.image %}<img src={{ event.image.url }}>{% endif %}
+            <div class="acc-words">
+                <h2>{{ event.title }}</h2>
+                <p>{{ event.start_date }}{% if event.end_date %} - {{ event.end_date }}{% endif %}</p>
+                <br>
+                {% if event.description %}<p>{{ event.description }}</p>{% endif %}
+            </div>
+        </div>
+        <div class="acc-event-right">
+                <a href="{% url 'eventunregister' id=event.id %}">
+            <div class="acc-unregister">
+                <h4>un-register</h4>
+            </div></a>
+            <h3>at: <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a></h3>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>You aren't registered for any!</p>
+    {% endif %}
+</div>
+<div class="acc-right">
+    <div class="acc-user">
+        <h1>User Details</h1>
+        <p>
+            {{ user.username }} <br>
+            {{ user.first_name }} {{ user.last_name }} <br>
+            {{ user.email }}
+        </p>
+    </div>
+</div>
 
 {% endblock %}
