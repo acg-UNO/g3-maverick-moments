@@ -9,14 +9,31 @@
 <!-- iterate over the venues passed from the view.py -->
 {% block content %}
 
+{% if events.0 %}
 <h1>Upcoming Events</h1>
 <ul>
     {% for event in events %}
-        <li>
-            <a href="{% url 'eventdetails' id=event.id %}"><strong>{{ event.title }}</strong></a> - {{ event.start_date}}, {{ event.venue.state }}<br>
-
+        <li style="clear: left;">
+            {% if event.image %}<img src={{ event.image.url }} style="float: left; max-width: 200px; max-height: 200px;">{% endif %}
+            <a href="{% url 'eventdetails' id=event.id %}"><h1>{{ event.title }}</h1></a>
+             {{ event.start_date}}{% if event.end_date %} - {{ event.end_date }} {% endif %}, <br>
+             at <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a> <small>{{ event.venue.city }}, {{ event.venue.state }}</small> <br>
+            {% if user.is_authenticated %}
+                {% if event in registered %}
+                    <p>**You're registered</p>
+                    <p><a href="{% url 'eventunregister' id=event.id %}">unregister</a></p>
+                {% else %}
+                <br> <a href="{% url 'eventregister' id=event.id %}">REGISTER</a>
+                {% endif %}
+            {% else %}
+                <p><a href="{% url 'login' %}">Login</a> to register</p>
+            {% endif %}
+             <br style="clear: left;"><hr>
         </li>
     {% endfor %}
 </ul>
 
+{% else %}
+<h1> NO UPCOMING EVENTS </h1>
+{% endif %}
 {% endblock %}

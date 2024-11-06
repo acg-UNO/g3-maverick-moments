@@ -1,12 +1,25 @@
-.nav {
-    margin-left: auto;
-    margin-right: auto;
-    color: black;
+.topnav{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    overflow: hidden;
 }
-.nav h1{
-    display: inline;
+.topnav-events{
+    float: right;
 }
-.nav h2{
-    display: inline;
-    font-size: 12px;
+.topnav-venues{
+    float: left;
+}
+.topnav-mavmoment{
+    text-align: center;
+}
+.topnav-mavmoment h1{
+    font-size: 2.5rem;
+    margin-top: 10px;
+}
+.bubble{
+    border-radius: 15px;
+    background-color: lightgray;
+}
+.bubble h2{
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
 }

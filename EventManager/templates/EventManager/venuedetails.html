@@ -1,0 +1,34 @@
+{% extends 'EventManager/base.html' %}
+
+{% block content %}
+{% if venue.image %}<img src={{ venue.image.url }} style="max-height:200px; max-width:200px;">{% endif %}
+<h1>{{ venue.name }}</h1>
+<p>
+  {{ venue.address_line_1 }}
+  {{ venue.address_line2 }}.
+  {{ venue.city }},
+  {{ venue.state }}.
+  {{ venue.country }}. 
+  {{ venue.zipcode }}
+</p>
+<p>
+  <b>{{ venue.description }}</b>
+</p>
+
+  <h2>Upcoming Events at {{ venue.name }}</h2>
+  <p>{{ venue.location }}</p>
+  
+  <ul>
+    {% for event in upcoming_events %}
+      <li>
+        <a href="{% url 'eventdetails' id=event.id %}"><strong>{{ event.title }}</strong></a><br>
+        Date: {{ event.start_date }}<br>
+        Description: {{ event.description }}
+      </li>
+    {% empty %}
+      <p>No upcoming events.</p>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'venues' %}">Back to Venues</a>
+{% endblock %}
