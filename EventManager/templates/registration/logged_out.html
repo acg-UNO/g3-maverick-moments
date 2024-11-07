@@ -1,5 +1,14 @@
 {% extends "EventManager/base.html" %}
+{% block title %}Logged Out!{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
 {% block content %}
-<p>Logged out!</p>
-<a href="{% url 'login'%}">Click here to login again.</a>
+<div class="container">
+    <header>Sign Out</header>
+    <p class="sign-out-message">You have successfully logged out.</p>
+    <p class="footer-message">Click here to login again. <a href="{% url 'login' %}">Sign In</a></p>
+</div>
 {% endblock %}
