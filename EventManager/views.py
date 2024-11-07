@@ -74,7 +74,7 @@ def eventregister(request, id):
         return redirect('eventdetails', id)
     else:
         return redirect('login')
-    
+
 def eventunregister(request, id):
     if request.user.is_authenticated:
         try: event = Event.objects.get(id=id)
@@ -125,6 +125,13 @@ def account(request):
     user = request.user
     if not user.is_authenticated:
         return redirect("login")
-    
-    context = None
+    #1: get all registratoins by the user. 2: get the IDs of the events. 3: get a list of the events using the IDs
+    registrations = Registration.objects.filter(user=request.user)
+    registration_event_ids = list(registrations.values_list("event", flat=True))
+    registered_events = Event.objects.filter(id__in=registration_event_ids)
+    #order by date
+    events_list = registered_events.order_by('start_date')
+    context = {
+        'events': events_list,
+    }
     return render(request, "EventManager/account.html", context=context)
