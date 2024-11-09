@@ -3,13 +3,14 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f3f3f3;
     margin: 0;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
 .container {
+    margin-left: auto;
+    margin-right: auto;
     width: 400px;
     padding: 20px;
     background-color: #ffffff;
@@ -18,49 +19,11 @@ body {
     text-align: center;
 }
 
-/* Header and Logo */
-header {
-    font-size: 28px;
-    color: #4b0082; /* Dark purple */
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-header a {
-    text-decoration: none;
-    color: #4b0082;
-}
-
-header .logo {
-    font-size: 32px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-}
-
-/* Navigation Buttons */
-.nav-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.nav-button {
-    background-color: #d3d3d3;
-    color: #4b0082;
-    border-radius: 8px;
-    padding: 8px 15px;
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.nav-button:hover {
-    background-color: #4b0082;
-    color: #fff;
-}
-
 /* Form Styles */
 form {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
     gap: 15px;
