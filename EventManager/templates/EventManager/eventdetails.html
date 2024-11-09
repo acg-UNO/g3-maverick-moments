@@ -4,12 +4,12 @@
 {% block title %} {{ event.title }} {% endblock %}
 
 {% block css %}
-<!-- link css files here -->
+<link href="{% static 'css/events.css' %}" rel="stylesheet">
 {% endblock %}
 
 
 {% block content %}
-
+<div class="acc-left"
 <h1>{{ event.title }}</h1>
 {% if user.is_authenticated %}
     {% if registered %} 
@@ -57,5 +57,5 @@
     {% else %}
         <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
     {% endif %}
-    
+ </div>
 {% endblock %}

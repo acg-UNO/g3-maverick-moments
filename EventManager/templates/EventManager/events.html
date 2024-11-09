@@ -1,23 +1,28 @@
 {% extends "EventManager/base.html" %}
-
+{% load static %}
 {% block title %} Upcoming Events {% endblock %}
 
 {% block css %}
-<!-- link css files here -->
+<link href="{% static 'css/events.css' %}" rel="stylesheet">
 {% endblock %}
-
-<!-- iterate over the venues passed from the view.py -->
 {% block content %}
 
-{% if events.0 %}
-<h1>Upcoming Events</h1>
-<ul>
+ <div class ="acc-left">
+    <h1>Upcoming Events</h1>
+    {% if events %}
     {% for event in events %}
-        <li style="clear: left;">
-            {% if event.image %}<img src={{ event.image.url }} style="float: left; max-width: 200px; max-height: 200px;">{% endif %}
-            <a href="{% url 'eventdetails' id=event.id %}"><h1>{{ event.title }}</h1></a>
+        <li style="clear: left; list-style-type:none ">
+        <div class="acc-event">
+            <div class="acc-details">
+            {% if event.image %}<img src={{ event.image.url }}>{% endif %}
+            <div class="acc-words">
+            <a href="{% url 'eventdetails' id=event.id %}"><h2>{{ event.title }}</h2></a>
              {{ event.start_date}}{% if event.end_date %} - {{ event.end_date }} {% endif %}, <br>
+
+                {% if event.description %}<p>{{ event.description }}</p>{% endif %}
              at <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a> <small>{{ event.venue.city }}, {{ event.venue.state }}</small> <br>
+
+             <div class="acc-event-right">
             {% if user.is_authenticated %}
                 {% if event in registered %}
                     <p>**You're registered</p>
@@ -29,11 +34,16 @@
                 <p><a href="{% url 'login' %}">Login</a> to register</p>
             {% endif %}
              <br style="clear: left;"><hr>
-        </li>
+                </div>
+                </li>
+
+             </div>
+
     {% endfor %}
-</ul>
+
 
 {% else %}
 <h1> NO UPCOMING EVENTS </h1>
 {% endif %}
+
 {% endblock %}
