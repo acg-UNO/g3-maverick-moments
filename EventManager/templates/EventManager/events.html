@@ -18,7 +18,7 @@
             <div class="acc-words">
             <a href="{% url 'eventdetails' id=event.id %}"><h2>{{ event.title }}</h2></a>
              {{ event.start_date}}{% if event.end_date %} - {{ event.end_date }} {% endif %}, <br>
-
+            </div>
                 {% if event.description %}<p>{{ event.description }}</p>{% endif %}
              at <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a> <small>{{ event.venue.city }}, {{ event.venue.state }}</small> <br>
 
@@ -35,12 +35,12 @@
             {% endif %}
              <br style="clear: left;"><hr>
                 </div>
+            </div>
+        </div>
                 </li>
-
-             </div>
-
+        
     {% endfor %}
-
+</div>
 
 {% else %}
 <h1> NO UPCOMING EVENTS </h1>
