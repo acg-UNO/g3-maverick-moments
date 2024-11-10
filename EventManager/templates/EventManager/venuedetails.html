@@ -23,7 +23,7 @@
     <h1>{{ venue.name }}</h1>
     <p>
         {{ venue.address_line_1 }}<br>
-        {{ venue.address_line2 }}<br>
+        {% if venue.address_line2 %}{{ venue.address_line2 }}<br>{% endif %}
         {{ venue.city }}, {{ venue.state }}<br>
         {{ venue.country }}, {{ venue.zipcode }}
     </p>
