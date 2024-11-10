@@ -12,38 +12,43 @@
     {% if events %}
     {% for event in events %}
         <li style="clear: left; list-style-type:none ">
-        <div class="acc-event">
-            <div class="acc-details">
-            {% if event.image %}<img src={{ event.image.url }}>{% endif %}
-            <div class="acc-words">
-            <a href="{% url 'eventdetails' id=event.id %}"><h2>{{ event.title }}</h2></a>
-             {{ event.start_date}}{% if event.end_date %} - {{ event.end_date }} {% endif %}, <br>
-            </div>
-                {% if event.description %}<p>{{ event.description }}</p>{% endif %}
-             at <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a> <small>{{ event.venue.city }}, {{ event.venue.state }}</small> <br>
+            <div class="acc-event">
+                <div class="acc-details">
+                    {% if venue.image %}
+                    <img src="{{ venue.image.url }}" alt="{{ event.title }}" >
+                    {% endif %}
+                        <div class="acc-words">
+                            <a href="{% url 'eventdetails' id=event.id %}"><h2>{{ event.title }}</h2></a>
+                            {{ event.start_date}}{% if event.end_date %} - {{ event.end_date }} {% endif %},
 
-             <div class="acc-event-right">
-            {% if user.is_authenticated %}
-                {% if event in registered %}
-                    <p>**You're registered</p>
-                    <p><a href="{% url 'eventunregister' id=event.id %}">unregister</a></p>
-                {% else %}
-                <br> <a href="{% url 'eventregister' id=event.id %}">REGISTER</a>
-                {% endif %}
-            {% else %}
-                <p><a href="{% url 'login' %}">Login</a> to register</p>
-            {% endif %}
-             <br style="clear: left;"><hr>
+                            {% if event.description %}<p>{{ event.description }}</p>{% endif %}
+                            at <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a> <small>{{ event.venue.city }}, {{ event.venue.state }}</small> <br>
+                        </div>
                 </div>
+                    <div class="acc-event-right">
+                        {% if user.is_authenticated %}
+                        {% if event in registered %}
+                        <p>**You're registered</p>
+                        <p><a href="{% url 'eventunregister' id=event.id %}">unregister</a></p><br>
+                        {% else %}
+                        <br> <a href="{% url 'eventregister' id=event.id %}">REGISTER</a><br>
+
+                            
+                            {% endif %}
+                            {% else %}
+                             <p><a href="{% url 'login' %}">Login</a> to register</p>
+                            {% endif %}
+                            <br style="clear: left;"><hr>
+
+                    </div>
+
             </div>
-        </div>
-                </li>
-        
+
+        </li>
     {% endfor %}
 </div>
 
-{% else %}
-<h1> NO UPCOMING EVENTS </h1>
-{% endif %}
-
+    {% else %}
+    <h1> NO UPCOMING EVENTS </h1>
+    {% endif %}
 {% endblock %}
