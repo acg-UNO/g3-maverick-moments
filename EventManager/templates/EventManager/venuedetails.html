@@ -1,34 +1,45 @@
 {% extends 'EventManager/base.html' %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'css/venuedetails.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-{% if venue.image %}<img src={{ venue.image.url }} style="max-height:200px; max-width:200px;">{% endif %}
-<h1>{{ venue.name }}</h1>
-<p>
-  {{ venue.address_line_1 }}
-  {{ venue.address_line2 }}.
-  {{ venue.city }},
-  {{ venue.state }}.
-  {{ venue.country }}. 
-  {{ venue.zipcode }}
-</p>
-<p>
-  <b>{{ venue.description }}</b>
-</p>
 
-  <h2>Upcoming Events at {{ venue.name }}</h2>
-  <p>{{ venue.location }}</p>
-  
-  <ul>
-    {% for event in upcoming_events %}
-      <li>
-        <a href="{% url 'eventdetails' id=event.id %}"><strong>{{ event.title }}</strong></a><br>
-        Date: {{ event.start_date }}<br>
-        Description: {{ event.description }}
-      </li>
-    {% empty %}
-      <p>No upcoming events.</p>
-    {% endfor %}
-  </ul>
+<div class="venue-left">
+    <div class="venue-image">
+        {% if venue.image %}
+        <img src="{{ venue.image.url }}" alt="{{ venue.name }}">
+        {% endif %}
+    </div>
+    <p>
+        <b>{{ venue.description }}</b>
+    </p>
 
-  <a href="{% url 'venues' %}">Back to Venues</a>
+</div>
+
+<div class="venue-right">
+    <h1>{{ venue.name }}</h1>
+    <p>
+        {{ venue.address_line_1 }}<br>
+        {% if venue.address_line2 %}{{ venue.address_line2 }}<br>{% endif %}
+        {{ venue.city }}, {{ venue.state }}<br>
+        {{ venue.country }}, {{ venue.zipcode }}
+    </p>
+
+    <h2>Upcoming Events at {{ venue.name }}</h2>
+    <ul>
+        {% for event in upcoming_events %}
+        <li class="venue-event">
+            <a href="{% url 'eventdetails' id=event.id %}">{{ event.title }}</a><br>
+            Date: {{ event.start_date }}{% if event.end_date %} - {{ event.end_date }}{% endif %}<br>
+            {% if event.description %}{{ event.description }}{% endif %}
+        </li>
+        {% empty %}
+        <p>No upcoming events.</p>
+        {% endfor %}
+    </ul>
+</div>
+    
 {% endblock %}
