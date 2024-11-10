@@ -1,14 +1,14 @@
 {% extends "EventManager/base.html" %}
+{% load static %}
 
 {% block title %} Venues {% endblock %}
 
 {% block css %}
-<!-- link css files here -->
+<!-- css goes here -->
 {% endblock %}
 
 <!-- iterate over the venues passed from the view.py -->
 {% block content %}
-
 <h1>Venues</h1>
 <ul>
     {% for venue in venues %}
@@ -20,5 +20,4 @@
         </li>
     {% endfor %}
 </ul>
-
 {% endblock %}

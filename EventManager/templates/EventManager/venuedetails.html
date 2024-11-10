@@ -1,34 +1,40 @@
 {% extends 'EventManager/base.html' %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'css/venuedetails.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-{% if venue.image %}<img src={{ venue.image.url }} style="max-height:200px; max-width:200px;">{% endif %}
-<h1>{{ venue.name }}</h1>
-<p>
-  {{ venue.address_line_1 }}
-  {{ venue.address_line2 }}.
-  {{ venue.city }},
-  {{ venue.state }}.
-  {{ venue.country }}. 
-  {{ venue.zipcode }}
-</p>
-<p>
-  <b>{{ venue.description }}</b>
-</p>
-
-  <h2>Upcoming Events at {{ venue.name }}</h2>
-  <p>{{ venue.location }}</p>
-  
-  <ul>
-    {% for event in upcoming_events %}
-      <li>
-        <a href="{% url 'eventdetails' id=event.id %}"><strong>{{ event.title }}</strong></a><br>
-        Date: {{ event.start_date }}<br>
-        Description: {{ event.description }}
-      </li>
-    {% empty %}
-      <p>No upcoming events.</p>
-    {% endfor %}
-  </ul>
-
-  <a href="{% url 'venues' %}">Back to Venues</a>
+<div class="main-container">
+    <div class="venue-details">
+        {% if venue.image %}
+        <img src="{{ venue.image.url }}" alt="{{ venue.name }}">
+        {% endif %}
+        <h1>{{ venue.name }}</h1>
+        <p>
+          {{ venue.address_line_1 }}<br>
+          {{ venue.address_line2 }}<br>
+          {{ venue.city }}, {{ venue.state }}<br>
+          {{ venue.country }}, {{ venue.zipcode }}
+        </p>
+        <p><b>{{ venue.description }}</b></p>
+    </div> 
+    
+    <div class="events-section">   
+        <h2>Upcoming Events at {{ venue.name }}</h2>
+        <ul>
+            {% for event in upcoming_events %}
+            <li>
+                <a href="{% url 'eventdetails' id=event.id %}">{{ event.title }}</a><br>
+                Date: {{ event.start_date }}<br>
+                Description: {{ event.description }}
+            </li>
+            {% empty %}
+            <p>No upcoming events.</p>
+            {% endfor %}
+        </ul>
+    </div> 
+</div>
+<a href="{% url 'venues' %}" class="back-link">Back to Venues</a>
 {% endblock %}
