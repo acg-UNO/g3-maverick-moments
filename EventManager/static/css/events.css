@@ -9,7 +9,7 @@
 .acc-event{
     width: 100%;
     background-color: lightgray;
-    opacity: 0.1;
+    opacity: 0.8;
     overflow: hidden;
     border-radius: 1rem;
     margin-bottom: 1rem;
@@ -81,4 +81,5 @@
 body{
     background-image: url("Image/MM.jpg");
     background-size: cover;
+
 }
