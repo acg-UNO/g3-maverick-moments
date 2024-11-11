@@ -2,11 +2,13 @@
 {% load static %}
 {% block title %} Upcoming Events {% endblock %}
 
+
 {% block css %}
+
 <link href="{% static 'css/events.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/Image/MM.jpg' %}">
 {% endblock %}
 {% block content %}
-
  <div class ="acc-left">
     <h1>Upcoming Events</h1>
     {% if events %}
@@ -33,7 +35,7 @@
                         {% else %}
                         <br> <a href="{% url 'eventregister' id=event.id %}">REGISTER</a><br>
 
-                            
+
                             {% endif %}
                             {% else %}
                              <p><a href="{% url 'login' %}">Login</a> to register</p>

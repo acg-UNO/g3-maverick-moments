@@ -9,6 +9,7 @@
 .acc-event{
     width: 100%;
     background-color: lightgray;
+    opacity: 0.1;
     overflow: hidden;
     border-radius: 1rem;
     margin-bottom: 1rem;
@@ -76,4 +77,8 @@
 }
 .acc-user{
     margin-right: 5rem;
+}
+body{
+    background-image: url("Image/MM.jpg");
+    background-size: cover;
 }
