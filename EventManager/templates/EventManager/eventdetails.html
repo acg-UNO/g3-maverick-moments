@@ -21,7 +21,17 @@
 {% else %}
     <p><a href="{% url 'login' %}">Login</a> to register</p>
 {% endif %}
-    
+{% if user.is_superuser %}
+    <a href="{% url 'edit_event' event.id %}" class="edit-event-btn">Edit Event</a>
+{% endif %}
+{% if user.is_superuser %}
+    <h3>Registrations for this Event</h3>
+    <ul>
+        {% for registration in event.registrations.all %}
+            <li>{{ registration.user.username }} - {{ registration.timestamp }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}    
     
 {% if event.image %}    
     <img src="{{ event.image.url }}" style="max-width: 100px; max-height: 100px;">
@@ -57,5 +67,5 @@
     {% else %}
         <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
     {% endif %}
- </div>
+    </div>    
 {% endblock %}

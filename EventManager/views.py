@@ -135,3 +135,35 @@ def account(request):
         'events': events_list,
     }
     return render(request, "EventManager/account.html", context=context)
+
+def add_event(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = EventCommentForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('events')
+        else:
+            form = EventCommentForm()
+        return render(request, 'add_event.html', {'form': form})
+    else:
+        return redirect('events')
+
+def edit_event(request, event_id):
+    if request.user.is_superuser:
+        event = get_object_or_404(Event, id=event_id)
+        if request.method == 'POST':
+            form = EventCommentForm(request.POST, instance=event)
+            if form.is_valid():
+                form.save()
+                return redirect('event_detail', event_id=event.id)
+        else:
+            form = EventCommentForm(instance=event)
+        return render(request, 'edit_event.html', {'form': form, 'event': event})
+    else:
+        return redirect('events')
+
+def event_detail(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    registrations = event.registrations.all() if request.user.is_superuser else None
+    return render(request, 'eventdetails.html', {'event': event, 'registrations': registrations})
