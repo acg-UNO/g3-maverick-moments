@@ -4,6 +4,7 @@ from .forms import *
 import datetime
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 #About page
 def index(request):
@@ -95,14 +96,53 @@ def venues(request):
 
 #Venue Details and future events
 def venuedetails(request, id):
-    venue = get_object_or_404(Venue, id=id)
-    print()
+    try: venue = get_object_or_404(Venue, id=id)
+    except:
+        messages.error(request, "venue not found")
+        return redirect('venues')
     upcoming_events = Event.objects.filter(venue=venue, start_date__gte=timezone.now()).order_by('start_date')
     context = {
         'venue': venue,
         'upcoming_events': upcoming_events,
     }
     return render(request, 'EventManager/venuedetails.html', context)
+
+#edit venue
+def editvenuedetails(request, id):
+    user = request.user
+    if not user.is_superuser:
+        return redirect('venuedetails', id)
+    try: venue = get_object_or_404(Venue, id=id)
+    except: 
+        messages.error(request, "venue not found")
+        return redirect('venues')
+    if request.method == 'POST':
+        form = VenueDetailsForm(request.POST, request.FILES, instance=venue)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ("venue saved"))
+            return redirect('venuedetails', id)
+    form = VenueDetailsForm(instance = venue)
+    context = {
+        'form': form,
+        'venue': venue
+    }
+    return render(request, 'SuperUser/editvenuedetails.html', context=context)
+
+#delete a given venue
+def deletevenue(request, id):
+    user = request.user
+    if not user.is_superuser:
+        return redirect('venuedetails', id)
+    try: venue = get_object_or_404(Venue, id=id)
+    except: return redirect('venues')
+    try:
+        venue.delete()
+        messages.success(request, "venue deleted successfully")
+        return redirect('venues')
+    except:
+        messages.error(request, "unable to delete venue")
+        return redirect('venuedetials', id)
 
 #Account creation
 def register(request):

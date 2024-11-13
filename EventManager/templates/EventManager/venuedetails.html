@@ -7,6 +7,13 @@
 
 {% block content %}
 
+{% if messages %}
+{% for message in messages %}
+    {% if message.tags == 'success' %}<h3 style="color: green; text-align: center;">{{ message }}</h3>
+    {% else %}<h3 style="color: red; text-align: center;">{{ message }}</h3>{% endif %}
+{% endfor %}
+{% endif %}
+
 <div class="venue-left">
     <div class="venue-image">
         {% if venue.image %}
@@ -20,7 +27,7 @@
 </div>
 
 <div class="venue-right">
-    <h1>{{ venue.name }}</h1>
+    <h1>{{ venue.name }} {% if user.is_superuser %}(<a href="{% url 'editvenue' id=venue.id %}">edit</a>){% endif %}</h1>
     <p>
         {{ venue.address_line_1 }}<br>
         {% if venue.address_line2 %}{{ venue.address_line2 }}<br>{% endif %}

@@ -10,6 +10,13 @@
 <!-- iterate over the venues passed from the view.py -->
 {% block content %}
 
+{% if messages %}
+{% for message in messages %}
+    {% if message.tags == 'success' %}<h3 style="color: green; text-align: center;">{{ message }}</h3>
+    {% else %}<h3 style="color: red; text-align: center;">{{ message }}</h3>{% endif %}
+{% endfor %}
+{% endif %}
+
 <div class="venues-container">
   <h1>Venues</h1>
     <ul>
