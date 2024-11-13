@@ -13,15 +13,13 @@ edit Venue
 {% endfor %}
 {% endif %}
 
-<h1 style="text-align: center;">Edit Venue</h1>
+<h1 style="text-align: center;">Add Venue</h1>
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
      
     {{ form.as_p }}
-    <button type="submit">Save</button>
+    <button type="submit">Submit</button>
      
 </form> 
-<br>
-<a href="{% url 'deletevenue' id=venue.id %}"><h3>DELETE VENUE</h3></a>
 
 {% endblock %}

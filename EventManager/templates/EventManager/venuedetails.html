@@ -27,7 +27,7 @@
 </div>
 
 <div class="venue-right">
-    <h1>{{ venue.name }} {% if user.is_superuser %}(<a href="{% url 'editvenue' id=venue.id %}">edit</a>){% endif %}</h1>
+    <h1>{{ venue.name }} {% if user.is_superuser %}(<a href="{% url 'editvenue' id=venue.id %}">edit details</a>){% endif %}</h1>
     <p>
         {{ venue.address_line_1 }}<br>
         {% if venue.address_line2 %}{{ venue.address_line2 }}<br>{% endif %}

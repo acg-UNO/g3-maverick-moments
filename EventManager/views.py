@@ -107,6 +107,22 @@ def venuedetails(request, id):
     }
     return render(request, 'EventManager/venuedetails.html', context)
 
+def addvenue(request):
+    user = request.user
+    if not user.is_superuser:
+        return redirect('venuedetails', id)
+    if request.method == 'POST':
+        form = VenueDetailsForm(request.POST, request.FILES)
+        if form.is_valid():
+            venue = form.save()
+            messages.success(request, ("venue added successfully"))
+            return redirect('venuedetails', venue.id)
+    form = VenueDetailsForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'SuperUser/addvenue.html', context=context)
+
 #edit venue
 def editvenuedetails(request, id):
     user = request.user
