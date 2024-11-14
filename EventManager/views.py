@@ -223,3 +223,18 @@ def event_detail(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     registrations = event.registrations.all() if request.user.is_superuser else None
     return render(request, 'eventdetails.html', {'event': event, 'registrations': registrations})
+
+# allows users to delete their own comments, requires login.
+@login_required
+def delete_comment(request, comment_id):
+    # get the comment by id
+    comment = get_object_or_404(EventComment, id=comment_id)
+
+    # checks to make sure it is original author and can delete the comment
+    if request.user == comment.user:
+        comment.delete()
+        messages.success(request, "Comment deleted")
+    else:
+        messages.error(request, "You are not authorized to delete this comment.")
+
+    return redirect('eventdetails', id=comment.event.id)

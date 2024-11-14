@@ -50,6 +50,13 @@
                 <li>
                     <strong>{{ comment.user.username }}</strong> ({{ comment.created_at }}):<br>
                     {{ comment.text }}
+                    <!-- shows delete button if user logged in and is the author of the comment -->
+                    {% if user == comment.user %}
+                        <form method="POST" action="{% url 'delete_comment' comment.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-comment-btn">Delete</button>
+                        </form>
+                    {% endif %}
                 </li>
             {% empty %}
                 <p>No comments yet.</p>
