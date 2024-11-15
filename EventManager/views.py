@@ -222,7 +222,7 @@ def edit_event(request, event_id):
 def event_detail(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     registrations = event.registrations.all() if request.user.is_superuser else None
-    return render(request, 'eventdetails.html', {'event': event, 'registrations': registrations})
+    return render(request, 'EventManager/eventdetails.html', {'event': event, 'registrations': registrations})
 
 # allows users to delete their own comments, requires login.
 @login_required

@@ -74,5 +74,18 @@
     {% else %}
         <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
     {% endif %}
+<h1>{{ event.name }}</h1>
+<p>{{ event.description }}</p>
+<p>Date: {{ event.date }}</p>
+
+{% if user.is_superuser %}
+    <a href="{% url 'edit_event' event.id %}" class="btn btn-secondary">Edit Event</a>
+    <h2>Registrations</h2>
+    <ul>
+        {% for registration in registrations %}
+            <li>{{ registration.user.username }} - {{ registration.timestamp }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}    
     </div>    
 {% endblock %}

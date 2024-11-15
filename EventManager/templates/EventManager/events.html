@@ -56,4 +56,13 @@
     {% else %}
     <h1> NO UPCOMING EVENTS </h1>
     {% endif %}
+    <h1>Events</h1>
+{% if user.is_superuser %}
+    <a href="{% url 'add_event' %}" class="btn btn-primary">Add Event</a>
+{% endif %}
+<ul>
+    {% for event in events %}
+        <li><a href="{% url 'event_detail' event.id %}">{{ event.name }}</a></li>
+    {% endfor %}
+</ul>
 {% endblock %}
