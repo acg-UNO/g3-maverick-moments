@@ -21,7 +21,17 @@
 {% else %}
     <p><a href="{% url 'login' %}">Login</a> to register</p>
 {% endif %}
-    
+{% if user.is_superuser %}
+    <a href="{% url 'edit_event' event.id %}" class="edit-event-btn">Edit Event</a>
+{% endif %}
+{% if user.is_superuser %}
+    <h3>Registrations for this Event</h3>
+    <ul>
+        {% for registration in event.registrations.all %}
+            <li>{{ registration.user.username }} - {{ registration.timestamp }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}    
     
 {% if event.image %}    
     <img src="{{ event.image.url }}" style="max-width: 100px; max-height: 100px;">
@@ -40,6 +50,13 @@
                 <li>
                     <strong>{{ comment.user.username }}</strong> ({{ comment.created_at }}):<br>
                     {{ comment.text }}
+                    <!-- shows delete button if user logged in and is the author of the comment -->
+                    {% if user == comment.user %}
+                        <form method="POST" action="{% url 'delete_comment' comment.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-comment-btn">Delete</button>
+                        </form>
+                    {% endif %}
                 </li>
             {% empty %}
                 <p>No comments yet.</p>
@@ -57,5 +74,18 @@
     {% else %}
         <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
     {% endif %}
- </div>
+<h1>{{ event.name }}</h1>
+<p>{{ event.description }}</p>
+<p>Date: {{ event.date }}</p>
+
+{% if user.is_superuser %}
+    <a href="{% url 'edit_event' event.id %}" class="btn btn-secondary">Edit Event</a>
+    <h2>Registrations</h2>
+    <ul>
+        {% for registration in registrations %}
+            <li>{{ registration.user.username }} - {{ registration.timestamp }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}    
+    </div>    
 {% endblock %}

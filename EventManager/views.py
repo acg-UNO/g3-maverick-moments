@@ -4,6 +4,7 @@ from .forms import *
 import datetime
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 #About page
 def index(request):
@@ -95,14 +96,69 @@ def venues(request):
 
 #Venue Details and future events
 def venuedetails(request, id):
-    venue = get_object_or_404(Venue, id=id)
-    print()
+    try: venue = get_object_or_404(Venue, id=id)
+    except:
+        messages.error(request, "venue not found")
+        return redirect('venues')
     upcoming_events = Event.objects.filter(venue=venue, start_date__gte=timezone.now()).order_by('start_date')
     context = {
         'venue': venue,
         'upcoming_events': upcoming_events,
     }
     return render(request, 'EventManager/venuedetails.html', context)
+
+def addvenue(request):
+    user = request.user
+    if not user.is_superuser:
+        return redirect('venuedetails', id)
+    if request.method == 'POST':
+        form = VenueDetailsForm(request.POST, request.FILES)
+        if form.is_valid():
+            venue = form.save()
+            messages.success(request, ("venue added successfully"))
+            return redirect('venuedetails', venue.id)
+    form = VenueDetailsForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'SuperUser/addvenue.html', context=context)
+
+#edit venue
+def editvenuedetails(request, id):
+    user = request.user
+    if not user.is_superuser:
+        return redirect('venuedetails', id)
+    try: venue = get_object_or_404(Venue, id=id)
+    except: 
+        messages.error(request, "venue not found")
+        return redirect('venues')
+    if request.method == 'POST':
+        form = VenueDetailsForm(request.POST, request.FILES, instance=venue)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ("venue saved"))
+            return redirect('venuedetails', id)
+    form = VenueDetailsForm(instance = venue)
+    context = {
+        'form': form,
+        'venue': venue
+    }
+    return render(request, 'SuperUser/editvenuedetails.html', context=context)
+
+#delete a given venue
+def deletevenue(request, id):
+    user = request.user
+    if not user.is_superuser:
+        return redirect('venuedetails', id)
+    try: venue = get_object_or_404(Venue, id=id)
+    except: return redirect('venues')
+    try:
+        venue.delete()
+        messages.success(request, "venue deleted successfully")
+        return redirect('venues')
+    except:
+        messages.error(request, "unable to delete venue")
+        return redirect('venuedetials', id)
 
 #Account creation
 def register(request):
@@ -135,3 +191,50 @@ def account(request):
         'events': events_list,
     }
     return render(request, "EventManager/account.html", context=context)
+
+def add_event(request):
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            form = EventCommentForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('events')
+        else:
+            form = EventCommentForm()
+        return render(request, 'add_event.html', {'form': form})
+    else:
+        return redirect('events')
+
+def edit_event(request, event_id):
+    if request.user.is_superuser:
+        event = get_object_or_404(Event, id=event_id)
+        if request.method == 'POST':
+            form = EventCommentForm(request.POST, instance=event)
+            if form.is_valid():
+                form.save()
+                return redirect('event_detail', event_id=event.id)
+        else:
+            form = EventCommentForm(instance=event)
+        return render(request, 'edit_event.html', {'form': form, 'event': event})
+    else:
+        return redirect('events')
+
+def event_detail(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    registrations = event.registrations.all() if request.user.is_superuser else None
+    return render(request, 'EventManager/eventdetails.html', {'event': event, 'registrations': registrations})
+
+# allows users to delete their own comments, requires login.
+@login_required
+def delete_comment(request, comment_id):
+    # get the comment by id
+    comment = get_object_or_404(EventComment, id=comment_id)
+
+    # checks to make sure it is original author and can delete the comment
+    if request.user == comment.user:
+        comment.delete()
+        messages.success(request, "Comment deleted")
+    else:
+        messages.error(request, "You are not authorized to delete this comment.")
+
+    return redirect('eventdetails', id=comment.event.id)

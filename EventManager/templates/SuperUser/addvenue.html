@@ -1,0 +1,25 @@
+{% extends "EventManager/base.html" %}
+{% block title %}
+edit Venue
+{% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block content %}
+
+{% if form.errors %}
+{% for error in errors %}
+<h3 style="color: red; text-align: center;">{{ error }}</h3>
+{% endfor %}
+{% endif %}
+
+<h1 style="text-align: center;">Add Venue</h1>
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+     
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+     
+</form> 
+
+{% endblock %}

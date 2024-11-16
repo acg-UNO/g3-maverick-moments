@@ -25,6 +25,9 @@
 
                             {% if event.description %}<p>{{ event.description }}</p>{% endif %}
                             at <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a> <small>{{ event.venue.city }}, {{ event.venue.state }}</small> <br>
+                        {% if user.is_superuser %}
+    <a href="{% url 'add_event' %}" class="add-event-btn">Add Event</a>
+{% endif %}
                         </div>
                 </div>
                     <div class="acc-event-right">
@@ -53,4 +56,13 @@
     {% else %}
     <h1> NO UPCOMING EVENTS </h1>
     {% endif %}
+    <h1>Events</h1>
+{% if user.is_superuser %}
+    <a href="{% url 'add_event' %}" class="btn btn-primary">Add Event</a>
+{% endif %}
+<ul>
+    {% for event in events %}
+        <li><a href="{% url 'event_detail' event.id %}">{{ event.name }}</a></li>
+    {% endfor %}
+</ul>
 {% endblock %}
