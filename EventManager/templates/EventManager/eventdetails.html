@@ -4,13 +4,17 @@
 {% block title %} {{ event.title }} {% endblock %}
 
 {% block css %}
-<link href="{% static 'css/events.css' %}" rel="stylesheet">
+<link href="{% static 'css/eventdetails.css' %}" rel="stylesheet">
 {% endblock %}
 
 
 {% block content %}
-<div class="acc-left"
+<div class="acc-left">
+<div class="acc-event">
 <h1>{{ event.title }}</h1>
+<<<<<<< HEAD
+<div class="acc-details img">
+=======
 {% if user.is_authenticated %}
     {% if registered %} 
         <h2>You're registered for this event!</h2>
@@ -33,16 +37,25 @@
     </ul>
 {% endif %}    
     
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> cc40eb1afdec427ae70e743b77354de70e12805c
+=======
+>>>>>>> cc40eb1afdec427ae70e743b77354de70e12805c
+>>>>>>> Stashed changes
 {% if event.image %}    
-    <img src="{{ event.image.url }}" style="max-width: 100px; max-height: 100px;">
+    <img src="{{ event.image.url }}" alt="{{ event.name }}" style="max-width: 200px; max-height: 200px;">
 {% else %}
     <p><em>No image available for this event.</em></p>
 {% endif %}    
     
     <h2>{{ event.start_date }} {% if event.end_date %}- {{ event.end_date }}{% endif %}</h2>
-    <h2>AT <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a></h2>
+    <h2>At <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a></h2>
     <p>{{ event.description }}</p>
 
+<<<<<<< HEAD
+=======
 <!-- put comments here or sumn -->
     <h2>Comments</h2>
         <ul>
@@ -64,6 +77,7 @@
         </ul>
     
 <!-- comment form for registered users only -->
+>>>>>>> cc40eb1afdec427ae70e743b77354de70e12805c
     {% if user.is_authenticated %}
         <h3>Add a Comment</h3>
             <form method="POST">
@@ -74,6 +88,54 @@
     {% else %}
         <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
     {% endif %}
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+</div>
+<!-- put comments here or sumn -->
+
+<div class="acc-event-right">
+    <h2>Comments</h2>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <strong>{{ comment.user.username }}</strong> ({{ comment.created_at }}):<br>
+                    {{ comment.text }}
+                    <!-- shows delete button if user logged in and is the author of the comment -->
+                    {% if user == comment.user %}
+                        <form method="POST" action="{% url 'delete_comment' comment.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-comment-btn">Delete</button>
+                        </form>
+                    {% endif %}
+                </li>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+        </ul>
+</div>
+    <div class="acc-event-right h3">
+{% if user.is_authenticated %}
+    {% if registered %}
+        <h2>You're registered for this event!</h2>
+        <p><a href="{% url 'eventunregister' id=event.id %}">unregister</a></p>
+    {% else %}
+        <a href="{% url 'eventregister' id=event.id %}"><h2>REGISTER</h2></a>
+    {% endif %}
+<<<<<<< HEAD
+{% else %}
+    <p><a href="{% url 'login' %}">Login</a> to register</p>
+{% endif %}
+</div>
+<!-- comment form for registered users only -->
+
+</div>
+</div>
+=======
+=======
+>>>>>>> cc40eb1afdec427ae70e743b77354de70e12805c
+>>>>>>> Stashed changes
 <h1>{{ event.name }}</h1>
 <p>{{ event.description }}</p>
 <p>Date: {{ event.date }}</p>
@@ -87,5 +149,13 @@
         {% endfor %}
     </ul>
 {% endif %}    
+<<<<<<< Updated upstream
     </div>    
+=======
+
+<<<<<<< HEAD
+>>>>>>> cc40eb1afdec427ae70e743b77354de70e12805c
+=======
+>>>>>>> cc40eb1afdec427ae70e743b77354de70e12805c
+>>>>>>> Stashed changes
 {% endblock %}
