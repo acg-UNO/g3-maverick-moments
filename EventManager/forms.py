@@ -46,9 +46,13 @@ class VenueDetailsForm(forms.ModelForm):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         fields = ['name', 'description', 'date']
 =======
 
         fields = ['name', 'description', 'date']
 >>>>>>> Stashed changes
+=======
+        fields = ['title', 'description', 'start_date', 'end_date']
+>>>>>>> f6b1ecfc27da8b9aad21438af7ed43fbe9951bf8
