@@ -2,18 +2,18 @@
 {% load static %}
 {% block title %} Register {% endblock %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
 {% block content %}
-  <h1 style="text-align: center;">Create An Account</h1>
-<form method="POST">
-{% csrf_token %}
-     
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-     
-</form>  
-<br><br>
+    <h1 style="text-align: center;">Create An Account</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+
+    </form>
+    <br><br>
 
 
 

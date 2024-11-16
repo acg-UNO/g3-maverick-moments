@@ -4,88 +4,86 @@
 {% block title %} {{ event.title }} {% endblock %}
 
 {% block css %}
-<link href="{% static 'css/events.css' %}" rel="stylesheet">
+    <link href="{% static 'css/events.css' %}" rel="stylesheet">
 {% endblock %}
 
 
 {% block content %}
-<div class="acc-left"
-<h1>{{ event.title }}</h1>
-{% if user.is_authenticated %}
-    {% if registered %} 
-        <h2>You're registered for this event!</h2>
-        <p><a href="{% url 'eventunregister' id=event.id %}">unregister</a></p>
+    <h1>{{ event.title }}</h1>
+    {% if user.is_authenticated %}
+        {% if registered %}
+            <h2>You're registered for this event!</h2>
+            <p><a href="{% url 'eventunregister' id=event.id %}">unregister</a></p>
+        {% else %}
+            <a href="{% url 'eventregister' id=event.id %}"><h2>REGISTER</h2></a>
+        {% endif %}
     {% else %}
-        <a href="{% url 'eventregister' id=event.id %}"><h2>REGISTER</h2></a>
+        <p><a href="{% url 'login' %}">Login</a> to register</p>
     {% endif %}
-{% else %}
-    <p><a href="{% url 'login' %}">Login</a> to register</p>
-{% endif %}
-{% if user.is_superuser %}
-    <a href="{% url 'edit_event' event.id %}" class="edit-event-btn">Edit Event</a>
-{% endif %}
-{% if user.is_superuser %}
-    <h3>Registrations for this Event</h3>
-    <ul>
-        {% for registration in event.registrations.all %}
-            <li>{{ registration.user.username }} - {{ registration.timestamp }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}    
-    
-{% if event.image %}    
-    <img src="{{ event.image.url }}" style="max-width: 100px; max-height: 100px;">
-{% else %}
-    <p><em>No image available for this event.</em></p>
-{% endif %}    
-    
+    {% if user.is_superuser %}
+        <a href="{% url 'edit_event' event.id %}" class="edit-event-btn">Edit Event</a>
+    {% endif %}
+    {% if user.is_superuser %}
+        <h3>Registrations for this Event</h3>
+        <ul>
+            {% for registration in event.registrations.all %}
+                <li>{{ registration.user.username }} - {{ registration.timestamp }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if event.image %}
+        <img src="{{ event.image.url }}" style="max-width: 100px; max-height: 100px;" alt="">
+    {% else %}
+        <p><em>No image available for this event.</em></p>
+    {% endif %}
+
     <h2>{{ event.start_date }} {% if event.end_date %}- {{ event.end_date }}{% endif %}</h2>
     <h2>AT <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a></h2>
     <p>{{ event.description }}</p>
 
-<!-- put comments here or sumn -->
+    <!-- put comments here or sumn -->
     <h2>Comments</h2>
-        <ul>
-            {% for comment in comments %}
-                <li>
-                    <strong>{{ comment.user.username }}</strong> ({{ comment.created_at }}):<br>
-                    {{ comment.text }}
-                    <!-- shows delete button if user logged in and is the author of the comment -->
-                    {% if user == comment.user %}
-                        <form method="POST" action="{% url 'delete_comment' comment.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="delete-comment-btn">Delete</button>
-                        </form>
-                    {% endif %}
-                </li>
-            {% empty %}
-                <p>No comments yet.</p>
-            {% endfor %}
-        </ul>
-    
-<!-- comment form for registered users only -->
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.user.username }}</strong> ({{ comment.created_at }}):<br>
+                {{ comment.text }}
+                <!-- shows delete button if user logged in and is the author of the comment -->
+                {% if user == comment.user and comment.id%}
+                    <form method="POST" action="{% url 'delete_comment' comment.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-comment-btn">Delete</button>
+                    </form>
+                {% endif %}
+            </li>
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
+    </ul>
+
+    <!-- comment form for registered users only -->
     {% if user.is_authenticated %}
         <h3>Add a Comment</h3>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Submit Comment</button>
-            </form>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Comment</button>
+        </form>
     {% else %}
         <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
     {% endif %}
-<h1>{{ event.name }}</h1>
-<p>{{ event.description }}</p>
-<p>Date: {{ event.date }}</p>
+    <h1>{{ event.name }}</h1>
+    <p>{{ event.description }}</p>
+    <p>Date: {{ event.date }}</p>
 
-{% if user.is_superuser %}
-    <a href="{% url 'edit_event' event.id %}" class="btn btn-secondary">Edit Event</a>
-    <h2>Registrations</h2>
-    <ul>
-        {% for registration in registrations %}
-            <li>{{ registration.user.username }} - {{ registration.timestamp }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}    
-    </div>    
+    {% if user.is_superuser %}
+        <a href="{% url 'edit_event' event.id %}" class="btn btn-secondary">Edit Event</a>
+        <h2>Registrations</h2>
+        <ul>
+            {% for registration in registrations %}
+                <li>{{ registration.user.username }} - {{ registration.timestamp }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}

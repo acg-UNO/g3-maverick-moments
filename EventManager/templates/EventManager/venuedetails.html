@@ -2,51 +2,52 @@
 {% load static %}
 
 {% block css %}
-<link href="{% static 'css/venuedetails.css' %}" rel="stylesheet">
+    <link href="{% static 'css/venuedetails.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 
-{% if messages %}
-{% for message in messages %}
-    {% if message.tags == 'success' %}<h3 style="color: green; text-align: center;">{{ message }}</h3>
-    {% else %}<h3 style="color: red; text-align: center;">{{ message }}</h3>{% endif %}
-{% endfor %}
-{% endif %}
-
-<div class="venue-left">
-    <div class="venue-image">
-        {% if venue.image %}
-        <img src="{{ venue.image.url }}" alt="{{ venue.name }}">
-        {% endif %}
-    </div>
-    <p>
-        <b>{{ venue.description }}</b>
-    </p>
-
-</div>
-
-<div class="venue-right">
-    <h1>{{ venue.name }} {% if user.is_superuser %}(<a href="{% url 'editvenue' id=venue.id %}">edit details</a>){% endif %}</h1>
-    <p>
-        {{ venue.address_line_1 }}<br>
-        {% if venue.address_line2 %}{{ venue.address_line2 }}<br>{% endif %}
-        {{ venue.city }}, {{ venue.state }}<br>
-        {{ venue.country }}, {{ venue.zipcode }}
-    </p>
-
-    <h2>Upcoming Events at {{ venue.name }}</h2>
-    <ul>
-        {% for event in upcoming_events %}
-        <li class="venue-event">
-            <a href="{% url 'eventdetails' id=event.id %}">{{ event.title }}</a><br>
-            Date: {{ event.start_date }}{% if event.end_date %} - {{ event.end_date }}{% endif %}<br>
-            {% if event.description %}{{ event.description }}{% endif %}
-        </li>
-        {% empty %}
-        <p>No upcoming events.</p>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}<h3 style="color: green; text-align: center;">{{ message }}</h3>
+            {% else %}<h3 style="color: red; text-align: center;">{{ message }}</h3>{% endif %}
         {% endfor %}
-    </ul>
-</div>
-    
+    {% endif %}
+
+    <div class="venue-left">
+        <div class="venue-image">
+            {% if venue.image %}
+                <img src="{{ venue.image.url }}" alt="{{ venue.name }}">
+            {% endif %}
+        </div>
+        <p>
+            <b>{{ venue.description }}</b>
+        </p>
+
+    </div>
+
+    <div class="venue-right">
+        <h1>{{ venue.name }} {% if user.is_superuser %}(<a href="{% url 'editvenue' id=venue.id %}">edit details</a>
+            ){% endif %}</h1>
+        <p>
+            {{ venue.address_line_1 }}<br>
+            {% if venue.address_line2 %}{{ venue.address_line2 }}<br>{% endif %}
+            {{ venue.city }}, {{ venue.state }}<br>
+            {{ venue.country }}, {{ venue.zipcode }}
+        </p>
+
+        <h2>Upcoming Events at {{ venue.name }}</h2>
+        <ul>
+            {% for event in upcoming_events %}
+                <li class="venue-event">
+                    <a href="{% url 'eventdetails' id=event.id %}">{{ event.title }}</a><br>
+                    Date: {{ event.start_date }}{% if event.end_date %} - {{ event.end_date }}{% endif %}<br>
+                    {% if event.description %}{{ event.description }}{% endif %}
+                </li>
+            {% empty %}
+                <p>No upcoming events.</p>
+            {% endfor %}
+        </ul>
+    </div>
+
 {% endblock %}

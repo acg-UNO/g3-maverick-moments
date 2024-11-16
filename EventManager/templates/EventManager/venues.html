@@ -4,39 +4,39 @@
 {% block title %} Venues {% endblock %}
 
 {% block css %}
-<link href="{% static 'css/venues.css' %}" rel="stylesheet">
+    <link href="{% static 'css/venues.css' %}" rel="stylesheet">
 {% endblock %}
 
 <!-- iterate over the venues passed from the view.py -->
 {% block content %}
 
-{% if messages %}
-{% for message in messages %}
-    {% if message.tags == 'success' %}<h3 style="color: green; text-align: center;">{{ message }}</h3>
-    {% else %}<h3 style="color: red; text-align: center;">{{ message }}</h3>{% endif %}
-{% endfor %}
-{% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}<h3 style="color: green; text-align: center;">{{ message }}</h3>
+            {% else %}<h3 style="color: red; text-align: center;">{{ message }}</h3>{% endif %}
+        {% endfor %}
+    {% endif %}
 
-<div class="venues-container">
-  <h1>Venues {% if user.is_superuser %}(<a href="{% url 'addvenue' %}">add a venue</a>){% endif %}</h1>
-    <ul>
-    {% for venue in venues %}
-      <li class="venue-card">
-        <div class="venue-image">
-          {% if venue.image %}
-            <img src="{{ venue.image.url }}" alt="{{ venue.name }} image">
-          {% endif %}
-        </div>
-        <div class="venue-info">
-          <a href="{% url 'venuedetails' id=venue.id %}"><strong>{{ venue.name }}</strong></a><br>
-          <p>{{ venue.address_line_1 }}, {{ venue.city }}</p>
-          <p>{{ venue.state }}, {{ venue.country }}</p>
-        </div>
-      </li>
-    {% empty %}
-      <p>No venues available.</p>
-    {% endfor %}
-  </ul>
-</div>
-    
+    <div class="venues-container">
+        <h1>Venues {% if user.is_superuser %}(<a href="{% url 'addvenue' %}">add a venue</a>){% endif %}</h1>
+        <ul>
+            {% for venue in venues %}
+                <li class="venue-card">
+                    <div class="venue-image">
+                        {% if venue.image %}
+                            <img src="{{ venue.image.url }}" alt="{{ venue.name }} image">
+                        {% endif %}
+                    </div>
+                    <div class="venue-info">
+                        <a href="{% url 'venuedetails' id=venue.id %}"><strong>{{ venue.name }}</strong></a><br>
+                        <p>{{ venue.address_line_1 }}, {{ venue.city }}</p>
+                        <p>{{ venue.state }}, {{ venue.country }}</p>
+                    </div>
+                </li>
+            {% empty %}
+                <p>No venues available.</p>
+            {% endfor %}
+        </ul>
+    </div>
+
 {% endblock %}
