@@ -228,7 +228,7 @@ def event_detail(request, event_id):
 @login_required
 def delete_comment(request, comment_id):
     # get the comment by id
-    comment = get_object_or_404(EventComment, id=comment_id)
+    comment = get_object_or_404(EventComment, comment_id=comment_id)
 
     # checks to make sure it is original author and can delete the comment
     if request.user == comment.user:
