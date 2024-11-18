@@ -16,7 +16,7 @@
 
                 <div class="topnav-hello">
                     <p>hello, {{ user.username }}</p>
-                    <form action="{% url 'logout' %}" method="post">
+                    <form action="{% url 'logout' %}" method="post" style="width: 100%;">
                         {% csrf_token %}
                         <button type="submit">LOGOUT</button>
                     </form>

@@ -192,6 +192,21 @@ def account(request):
     }
     return render(request, "EventManager/account.html", context=context)
 
+def editaccount(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect("login")
+    if request.method == 'POST':
+        form = EditAccountForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('account')
+    else: form = EditAccountForm(instance=user)
+    context = {
+        'form': form
+    }
+    return render(request, 'EventManager/editaccount.html', context=context)
+
 def add_event(request):
     if request.user.is_superuser:
         if request.method == 'POST':
@@ -218,6 +233,7 @@ def edit_event(request, id):
         return render(request, 'EventManager/edit_event.html', {'form': form, 'event': event})
     else:
         return redirect('events')
+    
 def deleteevent(request, id):
     user = request.user
     if not user.is_superuser:
