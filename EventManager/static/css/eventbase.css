@@ -2,6 +2,13 @@
     float: left;
     width: 100%;
 }
+.events a{
+    color: black;
+    text-decoration: none;
+}
+.events a:hover{
+    color: white;
+}
 .events-event{
     width: 100%;
     background-color: lightgray;

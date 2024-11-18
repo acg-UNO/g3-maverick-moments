@@ -5,25 +5,35 @@
             <div class="events-details">
                 {% if event.image %}<img src={{ event.image.url }}>{% endif %}
                 <div class="events-words">
-                    <h2>{{ event.title }}</h2>
+                    <h2><a href="{% url 'eventdetails' id=event.id %}">{{ event.title }}</a></h2>
                     <p>{{ event.start_date }}{% if event.end_date %} - {{ event.end_date }}{% endif %}</p>
                     <br>
                     {% if event.description %}<p>{{ event.description }}</p>{% endif %}
                 </div>
             </div>
             <div class="events-right">
+                {% if event in registered %}
                 <a href="{% url 'eventunregister' id=event.id %}">
                     <div class="events-unregister">
+                        
                         <h4>un-register</h4>
                     </div>
                 </a>
+                {% else %}
+                <a href="{% url 'eventregister' id=event.id %}">
+                    <div class="events-unregister">
+                        
+                        <h4>register</h4>
+                    </div>
+                </a>
+                {% endif %}
                 <h3>at: <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a></h3>
             </div>
         </div>
     </div>
     {% endfor %}
 {% else %}
-    <p>You aren't registered for any!</p>
+    <p>No upcoming events</p>
 {% endif %}
 
 

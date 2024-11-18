@@ -6,15 +6,6 @@
 .acc-left h1{
     margin-top: 0px;
 }
-.acc-left a{
-    color: black;
-    text-decoration: none;
-}
-.acc-left a:hover{
-    color: white;
-}
-
-
 .acc-right{
     width:30%;
     float: right;

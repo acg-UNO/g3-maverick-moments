@@ -1,70 +1,14 @@
 {% extends "EventManager/base.html" %}
 {% load static %}
 {% block title %} Upcoming Events {% endblock %}
-
-
 {% block css %}
-
+    <link href="{% static 'css/eventbase.css' %}" rel="stylesheet">
     <link href="{% static 'css/events.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/Image/MM.jpg' %}">
 {% endblock %}
 {% block content %}
-    <div class="acc-left">
-        <h1>Upcoming Events</h1>
-        {% if events %}
-            {% for event in events %}
-                <li style="clear: left; list-style-type:none ">
-                    <div class="acc-event">
-                        <div class="acc-details">
-                            {% if event.image %}
-                                <img src="{{ event.image.url }}" style="max-width: 200px; max-height: 200px;" alt="">
-                            {% endif %}
-                            <div class="acc-words">
-                                <a href="{% url 'eventdetails' id=event.id %}"><h2>{{ event.title }}</h2></a>
-                                {{ event.start_date }}{% if event.end_date %} - {{ event.end_date }} {% endif %},
+<h1>UPCOMING EVENTS</h1>
+<div class="container">
+    {% include 'EventManager/eventbase.html' %}
+</div>
 
-                                {% if event.description %}<p>{{ event.description }}</p>{% endif %}
-                                at <a href="{% url 'venuedetails' id=event.venue.id %}">{{ event.venue.name }}</a>
-                                <small>{{ event.venue.city }}, {{ event.venue.state }}</small> <br>
-                                {% if user.is_superuser %}
-                                    <a href="{% url 'add_event' %}" class="add-event-btn">Add Event</a>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="acc-event-right">
-                            {% if user.is_authenticated %}
-                                {% if event in registered %}
-                                    <p>**You're registered</p>
-                                    <p><a href="{% url 'eventunregister' id=event.id %}">unregister</a></p><br>
-                                {% else %}
-                                    <br> <a href="{% url 'eventregister' id=event.id %}">REGISTER</a><br>
-
-
-                                {% endif %}
-                            {% else %}
-                                <p><a href="{% url 'login' %}">Login</a> to register</p>
-                            {% endif %}
-                            <br style="clear: left;">
-                            <hr>
-
-                        </div>
-
-                    </div>
-
-                </li>
-            {% endfor %}
-            </div>
-
-        {% else %}
-            <h1> NO UPCOMING EVENTS </h1>
-        {% endif %}
-    <h1>Events</h1>
-    {% if user.is_superuser %}
-        <a href="{% url 'add_event' %}" class="btn btn-primary">Add Event</a>
-    {% endif %}
-    <ul>
-        {% for event in events %}
-            <li><a href="{% url 'eventdetails' event.id %}">{{ event.name }}</a></li>
-        {% endfor %}
-    </ul>
 {% endblock %}

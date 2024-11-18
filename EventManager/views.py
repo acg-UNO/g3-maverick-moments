@@ -189,6 +189,7 @@ def account(request):
     events_list = registered_events.order_by('start_date')
     context = {
         'events': events_list,
+        'registered': events_list,
     }
     return render(request, "EventManager/account.html", context=context)
 
