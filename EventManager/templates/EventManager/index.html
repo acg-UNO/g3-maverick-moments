@@ -1,15 +1,37 @@
 {% extends "EventManager/base.html" %}
+{% load static %}
 {% block title %}
-    index
+About
 {% endblock %}
 {% block css %}
-    <!-- link css files here -->
-
+<link href="{% static 'css/about.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-    <!-- put the content of the page here. The navigation bar and bottom of the page are in the base.html file -->
-    <h1>We are Maverick Moments</h1>
-    <h2>We do events</h2>
-    <!-- above is filler -->
+    <img src="{% static 'images/MM.jpg' %}">
+    <div class="abt-right">
+        <h1>About Page</h1>
+        <p>
+            Welcome to Maverick Moments. <br>
+            Here you can check upcoming events in your area and register (RSVP) for them right here.<br>
+            <br>
+            Who We Are.<br>
+            Founded in 2024, MM was born out of a passion for memorable experiences<br>
+            <br>
+            Our Spaces.<br>
+            Each space is thoughtfully designed with modern amenities, high-end finishes, and customizable layouts to provide the ideal setting for any occasion. From intimate meeting rooms to expansive ballrooms and lush outdoor gardens, we offer versatile spaces to fit your needs.<br>
+            <br>
+            Why Choose Us?<br>
+            Prime Locations, Custom Experience, Exceptional Service.<br>
+        </p>
+    </div>
+    <div class="abt-bottom">
+        <p>
+            Contact Us<br>
+            xxx-xxx-xxxx<br>
+            Socials<br>
+            fakeprofile@fb.com<br>
+            twtter@faketwt.com<br>
+        </p>
+    </div>
 
 {% endblock %}

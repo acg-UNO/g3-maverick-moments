@@ -1,5 +1,8 @@
 {% extends "EventManager/base.html" %}
-
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
 {% block content %}
 <h1>Add Event</h1>
 <form method="post">
