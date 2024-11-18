@@ -201,7 +201,7 @@ def add_event(request):
                 return redirect('events')
         else:
             form = EventCommentForm()
-        return render(request, 'add_event.html', {'form': form})
+        return render(request, 'EventManager/add_event.html', {'form': form})
     else:
         return redirect('events')
 
