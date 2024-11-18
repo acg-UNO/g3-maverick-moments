@@ -1,10 +1,12 @@
 {% extends "EventManager/base.html" %}
-{% block title %}Add Event{% endblock %}
+
 {% block content %}
-    <h1>Add New Event</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Save Event</button>
-    </form>
+<h1>Add Event</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Event</button>
+</form>
+<a href="{% url 'events' %}">Back to Event List</a>
 {% endblock %}
+

@@ -195,34 +195,65 @@ def account(request):
 def add_event(request):
     if request.user.is_superuser:
         if request.method == 'POST':
-            form = EventCommentForm(request.POST)
+            form = EventForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect('events')
         else:
-            form = EventCommentForm()
+            form = EventForm()
         return render(request, 'EventManager/add_event.html', {'form': form})
     else:
         return redirect('events')
 
-def edit_event(request, event_id):
+def edit_event(request, id):
     if request.user.is_superuser:
-        event = get_object_or_404(Event, id=event_id)
+        event = get_object_or_404(Event, id=id)
         if request.method == 'POST':
             form = EventCommentForm(request.POST, instance=event)
             if form.is_valid():
                 form.save()
-                return redirect('event_detail', event_id=event.id)
+                return redirect('eventdetails', id=id)
         else:
             form = EventCommentForm(instance=event)
-        return render(request, 'edit_event.html', {'form': form, 'event': event})
+        return render(request, 'EventManager/edit_event.html', {'form': form, 'event': event})
     else:
         return redirect('events')
+def deleteevent(request, id):
+    user = request.user
+    if not user.is_superuser:
+        return redirect('eventdetails', id)
+    try: venue = get_object_or_404(Venue, id=id)
+    except: return redirect('events')
+    try:
+        venue.delete()
+        messages.success(request, "event deleted successfully")
+        return redirect('events')
+    except:
+        messages.error(request, "unable to delete event")
+        return redirect('eventdetails', id)
 
-def event_detail(request, event_id):
-    event = get_object_or_404(Event, id=event_id)
-    registrations = event.registrations.all() if request.user.is_superuser else None
-    return render(request, 'EventManager/eventdetails.html', {'event': event, 'registrations': registrations})
+def event_details(request, id):
+    event = get_object_or_404(Event, id=id)
+    registrations = Registration.objects.filter(event=event)
+
+    if request.method == "POST":
+        form = EventForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect('eventdetails', id=id)  # Stay on the details page after editing
+    else:
+        form = EventForm(instance=event)
+
+    return render(request, 'EventManager/eventdetails.html', {
+        'event': event,
+        'registrations': registrations,
+        'form': form,
+    })
+def delete_registration(request, id):
+    registration = get_object_or_404(Registration, id=id)
+    event_id = registration.event.id
+    registration.delete()
+    return redirect('eventdetails', id=event_id)
 
 # allows users to delete their own comments, requires login.
 @login_required
