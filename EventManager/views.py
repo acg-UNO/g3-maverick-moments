@@ -209,12 +209,12 @@ def edit_event(request, id):
     if request.user.is_superuser:
         event = get_object_or_404(Event, id=id)
         if request.method == 'POST':
-            form = EventCommentForm(request.POST, instance=event)
+            form = EventForm(request.POST, instance=event)
             if form.is_valid():
                 form.save()
                 return redirect('eventdetails', id=id)
         else:
-            form = EventCommentForm(instance=event)
+            form = EventForm(instance=event)
         return render(request, 'EventManager/edit_event.html', {'form': form, 'event': event})
     else:
         return redirect('events')
