@@ -27,6 +27,7 @@ urlpatterns = [
     # Account and Registration
     path('register/', views.register, name='register'),
     path('account/', views.account, name='account'),
+    path('editaccount/', views.editaccount, name='editaccount'),
     path('delete-registration/<int:id>/', views.delete_registration, name='delete_registration'),
 
 
