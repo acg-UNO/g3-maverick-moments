@@ -1,85 +1,62 @@
-.acc-left {
+.eventdetails-left, .eventdetails-right{
+    margin-left: 5%;
+    margin-top: 3rem;
     float: left;
-    width: 50%;
-    margin-left: 5rem;
+    overflow: hidden;
 }
-.acc-left h1{
-    margin-top: 0px;
+.eventdetails-left{
+    width: 50%
 }
-.acc-event{
-    width: 100%;
+.eventdetails-right{
+    width: 25%;
     background-color: lightgray;
-    opacity: 0.8;
-    overflow: hidden;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-    height: 12rem;
+    border-radius: 1.25rem;
+    height: 70vh;
 }
-.acc-details{
-    width: 60%;
+.eventdetails-left img{
+    max-width: 20rem;
     float: left;
-    overflow: hidden;
-    margin-left: 1rem;
+    margin-right: 3rem;
+}
+.eventdetails-left h1{
     margin-top: 1rem;
-    margin-bottom: 1rem;
 }
-.acc-details img{
-    max-width: 10rem;
-    max-height: 10rem;
-    float: left;
-}
-.acc-words{
-    margin-left: 11rem;
-}
-.acc-words h2{
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-.acc-words p{
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-.acc-event-right{
-    float: right;
-    text-align: right;
-    margin-top: 1rem;
-    margin-right: 1rem;
-}
-.acc-event-right h3{
-    margin-top: 8.5rem;
-}
-.acc-unregister{
-    float: right;
-    text-align: center;
-    width: 8rem;
-    background-color: white;
-    border-radius: 1rem;
-    overflow: hidden;
-}
-.acc-unregister:hover{
-    background-color: gray;
-}
-.acc-unregister h4{
-    margin: 1rem 1rem;
-}
-.acc-left a{
+.eventdetails-left h3{
     color: black;
+    font-weight: bolder;
+}
+.eventdetails-left a{
     text-decoration: none;
 }
-.acc-left a:hover{
-    color: white;
+.registercontainer{
+    clear: left;
+}
+.register{
+    background-color: lightgray;
+    border-radius: 1rem;
+    color: black;
+    width: 30%;
+}
+.register h2{
+    text-align: center;
+    padding: 1rem;
+}
+.commentbox{
+    clear: left;
+
 }
 
-
-.acc-right{
-    width:30%;
-    float: right;
+.eventdetails-right h2{
+    text-align: center;
 }
-.acc-user{
-    margin-right: 5rem;
+.eventdetails-right hr{
+    width: 80%;
+    color: black;
+    background-color: black;
 }
-body{
-    background-image: url("Image/MM.jpg");
-    background-size: cover;
 
+.registrations{
+    clear: left;
+    overflow: hidden;
+    margin-left: 5%;
 }

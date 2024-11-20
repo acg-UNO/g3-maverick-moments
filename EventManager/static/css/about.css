@@ -1,0 +1,16 @@
+img{
+    float: left;
+    max-width: 40%;
+}
+.abt-right{
+    max-width: 40%;
+    float: left;
+}
+.abt-right h1{
+    text-align: center;
+}
+.abt-bottom{
+    clear: left;
+    margin-left: 2rem;
+}
+

@@ -11,6 +11,13 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ["username", "first_name", "last_name", "email", "password1", "password2"]
 
+class EditAccountForm(forms.ModelForm):
+    email = forms.EmailField()
+    
+    class Meta:
+        model = User
+        fields = ["username", "first_name", "last_name", "email"]
+
 
 class EventCommentForm(forms.ModelForm):
     class Meta:
@@ -29,4 +36,3 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['description','title', 'description', 'start_date', 'end_date', 'venue', 'image']
-

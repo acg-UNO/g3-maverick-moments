@@ -1,22 +1,23 @@
-.acc-left {
+.events{
     float: left;
-    width: 50%;
-    margin-left: 5rem;
-}
-.acc-left h1{
-    margin-top: 0px;
-}
-
-.acc-event{
     width: 100%;
-    opacity: 0.8;
+}
+.events a{
+    color: black;
+    text-decoration: none;
+}
+.events a:hover{
+    color: white;
+}
+.events-event{
+    width: 100%;
     background-color: lightgray;
     overflow: hidden;
     border-radius: 1rem;
     margin-bottom: 1rem;
     height: 12rem;
 }
-.acc-details{
+.events-details{
     width: 60%;
     float: left;
     overflow: hidden;
@@ -24,32 +25,32 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
-.acc-details img{
+.events-details img{
     max-width: 10rem;
     max-height: 10rem;
     float: left;
 }
-.acc-words{
+.events-words{
     margin-left: 11rem;
 }
-.acc-words h2{
+.events-words h2{
     margin-top: 0px;
     margin-bottom: 0px;
 }
-.acc-words p{
+.events-words p{
     margin-top: 0px;
     margin-bottom: 0px;
 }
-.acc-event-right{
+.events-right{
     float: right;
     text-align: right;
     margin-top: 1rem;
     margin-right: 1rem;
 }
-.acc-event-right h3{
+.events-right h3{
     margin-top: 8.5rem;
 }
-.acc-unregister{
+.events-unregister{
     float: right;
     text-align: center;
     width: 8rem;
@@ -57,34 +58,14 @@
     border-radius: 1rem;
     overflow: hidden;
 }
-.acc-unregister:hover{
+.events-unregister:hover{
     background-color: gray;
 }
-.acc-unregister h4{
+.events-unregister h4{
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 }
-.acc-left a{
-    color: black;
-    text-decoration: none;
-}
-.acc-left a:hover{
-    color: white;
-}
 
 
-
-.acc-right{
-    width:30%;
-    float: right;
-}
-.acc-user{
-    margin-right: 5rem;
-}
-body{
-    background-image: url("Image/MM.jpg");
-    background-size: cover;
-
-}

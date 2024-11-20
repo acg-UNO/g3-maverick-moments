@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    {% if messages %}
+    {% if messages and user.is_superuser %}
         {% for message in messages %}
             {% if message.tags == 'success' %}<h3 style="color: green; text-align: center;">{{ message }}</h3>
             {% else %}<h3 style="color: red; text-align: center;">{{ message }}</h3>{% endif %}

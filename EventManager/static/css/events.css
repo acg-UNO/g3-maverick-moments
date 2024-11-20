@@ -1,85 +1,13 @@
-.acc-left {
-    float: left;
-    width: 50%;
-    margin-left: 5rem;
-}
-.acc-left h1{
-    margin-top: 0px;
-}
-.acc-event{
-    width: 100%;
-    background-color: lightgray;
-    opacity: 0.8;
-    overflow: hidden;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-    height: 100%;
-}
-.acc-details{
+.container{
     width: 60%;
-    float: left;
-    overflow: hidden;
-    margin-left: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
 }
-.acc-details img{
-    max-width: 10rem;
-    max-height: 10rem;
-    float: left;
-}
-.acc-words{
-    margin-left: 11rem;
-}
-.acc-words h2{
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-.acc-words p{
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-.acc-event-right{
-    float: right;
-    text-align: right;
-    margin-top: 1rem;
-    margin-right: 1rem;
-}
-.acc-event-right h3{
-    margin-top: 8.5rem;
-}
-.acc-unregister{
-    float: right;
+h1{
     text-align: center;
-    width: 8rem;
-    background-color: white;
-    border-radius: 1rem;
-    overflow: hidden;
-}
-.acc-unregister:hover{
-    background-color: gray;
-}
-.acc-unregister h4{
-    margin: 1rem 1rem;
-}
-.acc-left a{
-    color: black;
-    text-decoration: none;
-}
-.acc-left a:hover{
-    color: white;
-}
-
-
-.acc-right{
-    width:30%;
-    float: right;
-}
-.acc-user{
-    margin-right: 5rem;
+    margin-top: 0px;
 }
 body{
     background-image: url("Image/MM.jpg");
     background-size: cover;
-
 }
