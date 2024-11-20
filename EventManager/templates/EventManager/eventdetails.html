@@ -76,7 +76,7 @@
 
                              <!-- comment form for registered users only -->
                                 {% if user.is_authenticated %}
-                                    
+
                                 <h3>Add a Comment</h3>
                                     <form method="POST">
                                     {% csrf_token %}

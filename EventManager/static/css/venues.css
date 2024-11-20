@@ -6,6 +6,7 @@ body {
 
 .venues-container {
     padding: 20px 50px;
+    opacity: 0.8;
     max-width: 1200px;
     margin: auto;
 }
@@ -49,4 +50,9 @@ body {
 .venues-container h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
+}
+body{
+    background-image: url("Image/MM.jpg");
+    background-size: cover;
+
 }
