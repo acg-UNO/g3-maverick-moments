@@ -295,8 +295,8 @@ def delete_comment(request, comment_id):
     # get the comment by id
     comment = get_object_or_404(EventComment, comment_id=comment_id)
 
-    # checks to make sure it is original author and can delete the comment
-    if request.user == comment.user:
+    # checks to make sure it is original author or superuser and can delete the comment
+    if request.user == comment.user or request.user.is_superuser:
         comment.delete()
         messages.success(request, "Comment deleted")
     else:
