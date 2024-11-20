@@ -1,24 +1,11 @@
 {% extends "EventManager/base.html" %}
 {% load static %}
 {% block title %}
-
-    Maverick Moments
-
 About
 {% endblock %}
-
-
 {% block css %}
-
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/Image/MM.jpg' %}">
-
-{% endblock %}
-{% block content %}
-    <!-- put the content of the page here. The navigation bar and bottom of the page are in the base.html file -->
-    <h1 style="text-align: center" >Welcome to Maverick Moments</h1>
-
-<link href="{% static 'css/about.css' %}" rel="stylesheet">
+    <link href="{% static 'css/about.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
     <img src="{% static 'images/MM.jpg' %}">
@@ -46,39 +33,5 @@ About
             fakeprofile@fb.com<br>
             twtter@faketwt.com<br>
         </p>
-    </div>
-
-
-
-    <h2 style="text-align: center">About Us</h2>
-    <div style="text-align: center;background-color: lightgrey;
-    width: fit-content;height: auto;border-radius: 1rem;place-content: center;float: right">
-
-
-<p>Who we are.
-Founded in 2024, Maverick Moments was born out of passion for
-    Memorable experiences.</p>
-
-
-<p>Our Spaces.
-Each space is thoughtfully designed with modern amenities,
-high-end finishes,<br> and customizable layouts to provide the
-ideal setting for any occasion. Form intimate meeting rooms <br>to
-expansive ballrooms and lush outdoor gardens, we offer
-    versatile spaces to fit your needs.</p>
-
-
-<p>Why choose us?
-    Prime Locations, Custom Experience, Exceptional Service.</p>
-
-        <p> Here you can check upcoming events in your area and register
-    for them in the same place.</p>
-    <!-- above is filler -->
-    </div>
-    <div class="bottom">Contact Us <br>
-        1-800-MAV-RICK <br>
-    help@maverickmoments.com <br>
-    Socials <br>
-    MaverickMoments@facebook.com
     </div>
 {% endblock %}
