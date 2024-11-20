@@ -1,0 +1,52 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.venues-container {
+    padding: 20px 50px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.venue-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.venue-image img {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.venue-info {
+    flex-grow: 1;
+}
+
+.venue-info a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.venue-info a:hover {
+    text-decoration: underline;
+}
+
+.venue-info p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.venues-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}

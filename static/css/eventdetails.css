@@ -1,0 +1,62 @@
+.eventdetails-left, .eventdetails-right{
+    margin-left: 5%;
+    margin-top: 3rem;
+    float: left;
+    overflow: hidden;
+}
+.eventdetails-left{
+    width: 50%
+}
+.eventdetails-right{
+    width: 25%;
+    background-color: lightgray;
+    border-radius: 1.25rem;
+    height: 70vh;
+}
+.eventdetails-left img{
+    max-width: 20rem;
+    float: left;
+    margin-right: 3rem;
+}
+.eventdetails-left h1{
+    margin-top: 1rem;
+}
+.eventdetails-left h3{
+    color: black;
+    font-weight: bolder;
+}
+.eventdetails-left a{
+    text-decoration: none;
+}
+.registercontainer{
+    clear: left;
+}
+.register{
+    background-color: lightgray;
+    border-radius: 1rem;
+    color: black;
+    width: 30%;
+}
+.register h2{
+    text-align: center;
+    padding: 1rem;
+}
+.commentbox{
+    clear: left;
+
+}
+
+.eventdetails-right h2{
+    text-align: center;
+}
+.eventdetails-right hr{
+    width: 80%;
+    color: black;
+    background-color: black;
+}
+
+.registrations{
+    clear: left;
+    overflow: hidden;
+    margin-left: 5%;
+}

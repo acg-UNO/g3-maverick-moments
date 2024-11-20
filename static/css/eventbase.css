@@ -1,0 +1,71 @@
+.events{
+    float: left;
+    width: 100%;
+}
+.events a{
+    color: black;
+    text-decoration: none;
+}
+.events a:hover{
+    color: white;
+}
+.events-event{
+    width: 100%;
+    background-color: lightgray;
+    overflow: hidden;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    height: 12rem;
+}
+.events-details{
+    width: 60%;
+    float: left;
+    overflow: hidden;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.events-details img{
+    max-width: 10rem;
+    max-height: 10rem;
+    float: left;
+}
+.events-words{
+    margin-left: 11rem;
+}
+.events-words h2{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.events-words p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.events-right{
+    float: right;
+    text-align: right;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+.events-right h3{
+    margin-top: 8.5rem;
+}
+.events-unregister{
+    float: right;
+    text-align: center;
+    width: 8rem;
+    background-color: white;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+.events-unregister:hover{
+    background-color: gray;
+}
+.events-unregister h4{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+

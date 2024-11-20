@@ -1,0 +1,52 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.venue-left {
+    float: left;
+    width: 50%;
+    margin-left: 5rem;
+}
+
+.venue-right {
+    width: 40%;
+    float: right;
+    margin-right:3rem
+}
+
+.venue-image img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+}
+
+.venue-right h1 {
+    margin-top: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.venue-right p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.venue-event {
+    background-color: lightgray;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.venue-event a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.venue-event a:hover {
+    color: gray;
+    text-decoration: underline;
+}
