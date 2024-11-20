@@ -6,7 +6,7 @@
     <link href="{% static 'css/events.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-<h1>UPCOMING EVENTS</h1>
+<h1>UPCOMING EVENTS{% if user.is_superuser %} (<a href="{% url 'add_event' %}">add an event</a>){% endif %}</h1>
 <div class="container">
     {% include 'EventManager/eventbase.html' %}
 </div>

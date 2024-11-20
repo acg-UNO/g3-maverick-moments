@@ -25,11 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("EventManager.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}), #serve media files when deployed
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root':settings.STATIC_ROOT}), #serve static files when deployed
 ]
-
-# allows to show img if debug = true during development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-else:
-    urlpatterns += re_path(r'^media/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}) #serve media files when deployed
-    urlpatterns += re_path(r'^static/(?P<path>.*)$', serve, {'document_root':settings.STATIC_ROOT}) #serve static files when deployed

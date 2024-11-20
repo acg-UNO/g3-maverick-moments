@@ -80,7 +80,7 @@ def eventdetails(request, id):
 def add_event(request):
     if request.user.is_superuser:
         if request.method == 'POST':
-            form = EventForm(request.POST)
+            form = EventForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect('events')
@@ -94,7 +94,7 @@ def edit_event(request, id):
     if request.user.is_superuser:
         event = get_object_or_404(Event, id=id)
         if request.method == 'POST':
-            form = EventForm(request.POST, instance=event)
+            form = EventForm(request.POST, request.FILES, instance=event)
             if form.is_valid():
                 form.save()
                 return redirect('eventdetails', id=id)
