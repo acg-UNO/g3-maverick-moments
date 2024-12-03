@@ -5,6 +5,7 @@ import datetime
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .emailhandler import user_alert as userEmail
 
 #SECTION Index and Event URLS
 
@@ -105,10 +106,11 @@ def edit_event(request, id):
         return redirect('events')
     
 def deleteevent(request, id):
+    print("DELETE GTET CALLED")
     user = request.user
     if not user.is_superuser:
         return redirect('eventdetails', id)
-    try: venue = get_object_or_404(Venue, id=id)
+    try: venue = get_object_or_404(Event, id=id)
     except: return redirect('events')
     try:
         venue.delete()
@@ -129,6 +131,7 @@ def eventregister(request, id):
         try: event = Event.objects.get(id = id)
         except: return redirect('events')
         Registration.objects.create(user = request.user, event = event)
+        userEmail('eventRegister', request.user, event=event)
         return redirect('eventdetails', id)
     else:
         return redirect('login')
@@ -141,6 +144,7 @@ def eventunregister(request, id):
             instance = Registration.objects.get(event=event, user=request.user)
             instance.delete()
         except: pass
+        userEmail('eventUnregister', request.user, event=event)
         return redirect('events')
     else:
         return redirect('login')
@@ -241,7 +245,8 @@ def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            userEmail('register', user)
             return redirect('login')
 
         return redirect("register")

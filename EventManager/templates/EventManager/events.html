@@ -6,6 +6,12 @@
     <link href="{% static 'css/events.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
+{% if messages and user.is_superuser %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}<h3 style="color: green; text-align: center;">{{ message }}</h3>
+        {% else %}<h3 style="color: red; text-align: center;">{{ message }}</h3>{% endif %}
+    {% endfor %}
+{% endif %}
 <h1>UPCOMING EVENTS{% if user.is_superuser %} (<a href="{% url 'add_event' %}">add an event</a>){% endif %}</h1>
 <div class="container">
     {% include 'EventManager/eventbase.html' %}
