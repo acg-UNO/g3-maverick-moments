@@ -164,7 +164,14 @@ def delete_registration(request, id):
 #List of venues
 def venues(request):
     venues_list = Venue.objects.all()
-    context = {'venues': venues_list}
+    form = VenueSearchForm()
+    if request.method == "POST":
+        form = VenueSearchForm(request.POST)
+        if form.is_valid():
+            vsearch = form.cleaned_data['search']
+            venues_list = Venue.objects.filter(name__icontains=vsearch)
+    context = {'venues': venues_list,
+               'form': form}
     return render(request, 'EventManager/venues.html', context)
 
 #Venue Details and future events

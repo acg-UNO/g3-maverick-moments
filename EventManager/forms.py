@@ -32,6 +32,9 @@ class VenueDetailsForm(forms.ModelForm):
         model = Venue
         fields = ['name', 'image', 'description', 'address_line_1', 'address_line_2', 'city', 'state', 'country', 'zipcode']
 
+class VenueSearchForm(forms.Form):
+    search = forms.CharField(label="Search ", max_length=50, required=False)
+
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event

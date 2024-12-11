@@ -19,6 +19,10 @@
 
     <div class="venues-container">
         <h1>Venues {% if user.is_superuser %}(<a href="{% url 'addvenue' %}">add a venue</a>){% endif %}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form }}
+        </form>
         <ul>
             {% for venue in venues %}
                 <li class="venue-card">
