@@ -1,0 +1,10 @@
+body{
+    background-image: url("Image/MM.jpg");
+    background-repeat: no-repeat;
+
+}
+div.bottom{
+    position: fixed;
+    bottom: 5%;
+    left: 5%;
+}
