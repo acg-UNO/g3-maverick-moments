@@ -16,10 +16,13 @@ def user_alert(type, user, event=None):
             message = f"this is an email confirmation that you have unregistered for {event.title}"
 
     receiver = [user.email]
-    send_mail(
-        subject,
-        message,
-        sender,
-        receiver,
-        fail_silently=False,
-    )
+    try:
+        send_mail(
+            subject,
+            message,
+            sender,
+            receiver,
+            fail_silently=False,
+        )
+    except:
+        pass
